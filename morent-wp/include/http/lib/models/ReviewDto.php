@@ -61,11 +61,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'user_id' => 'string',
         'user_name' => 'string',
         'car_id' => 'string',
-        'car_details' => 'string',
         'rating' => 'int',
         'comment' => 'string',
         'created_at' => '\DateTime',
-        'image_url' => 'string'
+        'user_image_url' => 'string'
     ];
 
     /**
@@ -80,11 +79,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'user_id' => 'uuid',
         'user_name' => null,
         'car_id' => 'uuid',
-        'car_details' => null,
         'rating' => 'int32',
         'comment' => null,
         'created_at' => 'date-time',
-        'image_url' => null
+        'user_image_url' => null
     ];
 
     /**
@@ -97,11 +95,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'user_id' => false,
         'user_name' => false,
         'car_id' => false,
-        'car_details' => false,
         'rating' => false,
         'comment' => false,
         'created_at' => false,
-        'image_url' => false
+        'user_image_url' => false
     ];
 
     /**
@@ -194,11 +191,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'user_id' => 'userId',
         'user_name' => 'userName',
         'car_id' => 'carId',
-        'car_details' => 'carDetails',
         'rating' => 'rating',
         'comment' => 'comment',
         'created_at' => 'createdAt',
-        'image_url' => 'imageUrl'
+        'user_image_url' => 'userImageUrl'
     ];
 
     /**
@@ -211,11 +207,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'user_id' => 'setUserId',
         'user_name' => 'setUserName',
         'car_id' => 'setCarId',
-        'car_details' => 'setCarDetails',
         'rating' => 'setRating',
         'comment' => 'setComment',
         'created_at' => 'setCreatedAt',
-        'image_url' => 'setImageUrl'
+        'user_image_url' => 'setUserImageUrl'
     ];
 
     /**
@@ -228,11 +223,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'user_id' => 'getUserId',
         'user_name' => 'getUserName',
         'car_id' => 'getCarId',
-        'car_details' => 'getCarDetails',
         'rating' => 'getRating',
         'comment' => 'getComment',
         'created_at' => 'getCreatedAt',
-        'image_url' => 'getImageUrl'
+        'user_image_url' => 'getUserImageUrl'
     ];
 
     /**
@@ -296,11 +290,10 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('user_id', $data ?? [], null);
         $this->setIfExists('user_name', $data ?? [], null);
         $this->setIfExists('car_id', $data ?? [], null);
-        $this->setIfExists('car_details', $data ?? [], null);
         $this->setIfExists('rating', $data ?? [], null);
         $this->setIfExists('comment', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
+        $this->setIfExists('user_image_url', $data ?? [], null);
     }
 
     /**
@@ -330,6 +323,30 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['user_id'] === null) {
+            $invalidProperties[] = "'user_id' can't be null";
+        }
+        if ($this->container['user_name'] === null) {
+            $invalidProperties[] = "'user_name' can't be null";
+        }
+        if ($this->container['car_id'] === null) {
+            $invalidProperties[] = "'car_id' can't be null";
+        }
+        if ($this->container['rating'] === null) {
+            $invalidProperties[] = "'rating' can't be null";
+        }
+        if ($this->container['comment'] === null) {
+            $invalidProperties[] = "'comment' can't be null";
+        }
+        if ($this->container['created_at'] === null) {
+            $invalidProperties[] = "'created_at' can't be null";
+        }
+        if ($this->container['user_image_url'] === null) {
+            $invalidProperties[] = "'user_image_url' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -348,7 +365,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -358,7 +375,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string $id id
      *
      * @return self
      */
@@ -375,7 +392,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets user_id
      *
-     * @return string|null
+     * @return string
      */
     public function getUserId()
     {
@@ -385,7 +402,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets user_id
      *
-     * @param string|null $user_id user_id
+     * @param string $user_id user_id
      *
      * @return self
      */
@@ -402,7 +419,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets user_name
      *
-     * @return string|null
+     * @return string
      */
     public function getUserName()
     {
@@ -412,7 +429,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets user_name
      *
-     * @param string|null $user_name user_name
+     * @param string $user_name user_name
      *
      * @return self
      */
@@ -429,7 +446,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets car_id
      *
-     * @return string|null
+     * @return string
      */
     public function getCarId()
     {
@@ -439,7 +456,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets car_id
      *
-     * @param string|null $car_id car_id
+     * @param string $car_id car_id
      *
      * @return self
      */
@@ -454,36 +471,9 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets car_details
-     *
-     * @return string|null
-     */
-    public function getCarDetails()
-    {
-        return $this->container['car_details'];
-    }
-
-    /**
-     * Sets car_details
-     *
-     * @param string|null $car_details car_details
-     *
-     * @return self
-     */
-    public function setCarDetails($car_details)
-    {
-        if (is_null($car_details)) {
-            throw new \InvalidArgumentException('non-nullable car_details cannot be null');
-        }
-        $this->container['car_details'] = $car_details;
-
-        return $this;
-    }
-
-    /**
      * Gets rating
      *
-     * @return int|null
+     * @return int
      */
     public function getRating()
     {
@@ -493,7 +483,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets rating
      *
-     * @param int|null $rating rating
+     * @param int $rating rating
      *
      * @return self
      */
@@ -510,7 +500,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets comment
      *
-     * @return string|null
+     * @return string
      */
     public function getComment()
     {
@@ -520,7 +510,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets comment
      *
-     * @param string|null $comment comment
+     * @param string $comment comment
      *
      * @return self
      */
@@ -537,7 +527,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets created_at
      *
-     * @return \DateTime|null
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -547,7 +537,7 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime $created_at created_at
      *
      * @return self
      */
@@ -562,28 +552,28 @@ class ReviewDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets image_url
+     * Gets user_image_url
      *
-     * @return string|null
+     * @return string
      */
-    public function getImageUrl()
+    public function getUserImageUrl()
     {
-        return $this->container['image_url'];
+        return $this->container['user_image_url'];
     }
 
     /**
-     * Sets image_url
+     * Sets user_image_url
      *
-     * @param string|null $image_url image_url
+     * @param string $user_image_url user_image_url
      *
      * @return self
      */
-    public function setImageUrl($image_url)
+    public function setUserImageUrl($user_image_url)
     {
-        if (is_null($image_url)) {
-            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
+        if (is_null($user_image_url)) {
+            throw new \InvalidArgumentException('non-nullable user_image_url cannot be null');
         }
-        $this->container['image_url'] = $image_url;
+        $this->container['user_image_url'] = $user_image_url;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * LeaveReviewCommand
+ * CreateRentalRequest
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * LeaveReviewCommand Class Doc Comment
+ * CreateRentalRequest Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -40,7 +40,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateRentalRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LeaveReviewCommand';
+    protected static $openAPIModelName = 'CreateRentalRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_id' => 'string',
         'car_id' => 'string',
-        'rental_id' => 'string',
-        'rating' => 'int',
-        'comment' => 'string'
+        'pickup_date' => '\DateTime',
+        'dropoff_date' => '\DateTime',
+        'pickup_location' => '\OpenAPI\Client\models\CarLocationDto',
+        'dropoff_location' => '\OpenAPI\Client\models\CarLocationDto'
     ];
 
     /**
@@ -72,11 +72,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user_id' => 'uuid',
         'car_id' => 'uuid',
-        'rental_id' => 'uuid',
-        'rating' => 'int32',
-        'comment' => null
+        'pickup_date' => 'date-time',
+        'dropoff_date' => 'date-time',
+        'pickup_location' => null,
+        'dropoff_location' => null
     ];
 
     /**
@@ -85,11 +85,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user_id' => false,
         'car_id' => false,
-        'rental_id' => false,
-        'rating' => false,
-        'comment' => false
+        'pickup_date' => false,
+        'dropoff_date' => false,
+        'pickup_location' => false,
+        'dropoff_location' => false
     ];
 
     /**
@@ -178,11 +178,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'user_id' => 'userId',
         'car_id' => 'carId',
-        'rental_id' => 'rentalId',
-        'rating' => 'rating',
-        'comment' => 'comment'
+        'pickup_date' => 'pickupDate',
+        'dropoff_date' => 'dropoffDate',
+        'pickup_location' => 'pickupLocation',
+        'dropoff_location' => 'dropoffLocation'
     ];
 
     /**
@@ -191,11 +191,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'user_id' => 'setUserId',
         'car_id' => 'setCarId',
-        'rental_id' => 'setRentalId',
-        'rating' => 'setRating',
-        'comment' => 'setComment'
+        'pickup_date' => 'setPickupDate',
+        'dropoff_date' => 'setDropoffDate',
+        'pickup_location' => 'setPickupLocation',
+        'dropoff_location' => 'setDropoffLocation'
     ];
 
     /**
@@ -204,11 +204,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'user_id' => 'getUserId',
         'car_id' => 'getCarId',
-        'rental_id' => 'getRentalId',
-        'rating' => 'getRating',
-        'comment' => 'getComment'
+        'pickup_date' => 'getPickupDate',
+        'dropoff_date' => 'getDropoffDate',
+        'pickup_location' => 'getPickupLocation',
+        'dropoff_location' => 'getDropoffLocation'
     ];
 
     /**
@@ -268,11 +268,11 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('user_id', $data ?? [], null);
         $this->setIfExists('car_id', $data ?? [], null);
-        $this->setIfExists('rental_id', $data ?? [], null);
-        $this->setIfExists('rating', $data ?? [], null);
-        $this->setIfExists('comment', $data ?? [], null);
+        $this->setIfExists('pickup_date', $data ?? [], null);
+        $this->setIfExists('dropoff_date', $data ?? [], null);
+        $this->setIfExists('pickup_location', $data ?? [], null);
+        $this->setIfExists('dropoff_location', $data ?? [], null);
     }
 
     /**
@@ -302,6 +302,21 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
+        if ($this->container['car_id'] === null) {
+            $invalidProperties[] = "'car_id' can't be null";
+        }
+        if ($this->container['pickup_date'] === null) {
+            $invalidProperties[] = "'pickup_date' can't be null";
+        }
+        if ($this->container['dropoff_date'] === null) {
+            $invalidProperties[] = "'dropoff_date' can't be null";
+        }
+        if ($this->container['pickup_location'] === null) {
+            $invalidProperties[] = "'pickup_location' can't be null";
+        }
+        if ($this->container['dropoff_location'] === null) {
+            $invalidProperties[] = "'dropoff_location' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -318,36 +333,9 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets user_id
-     *
-     * @return string|null
-     */
-    public function getUserId()
-    {
-        return $this->container['user_id'];
-    }
-
-    /**
-     * Sets user_id
-     *
-     * @param string|null $user_id user_id
-     *
-     * @return self
-     */
-    public function setUserId($user_id)
-    {
-        if (is_null($user_id)) {
-            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
-        }
-        $this->container['user_id'] = $user_id;
-
-        return $this;
-    }
-
-    /**
      * Gets car_id
      *
-     * @return string|null
+     * @return string
      */
     public function getCarId()
     {
@@ -357,7 +345,7 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets car_id
      *
-     * @param string|null $car_id car_id
+     * @param string $car_id car_id
      *
      * @return self
      */
@@ -372,82 +360,109 @@ class LeaveReviewCommand implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets rental_id
+     * Gets pickup_date
      *
-     * @return string|null
+     * @return \DateTime
      */
-    public function getRentalId()
+    public function getPickupDate()
     {
-        return $this->container['rental_id'];
+        return $this->container['pickup_date'];
     }
 
     /**
-     * Sets rental_id
+     * Sets pickup_date
      *
-     * @param string|null $rental_id rental_id
+     * @param \DateTime $pickup_date pickup_date
      *
      * @return self
      */
-    public function setRentalId($rental_id)
+    public function setPickupDate($pickup_date)
     {
-        if (is_null($rental_id)) {
-            throw new \InvalidArgumentException('non-nullable rental_id cannot be null');
+        if (is_null($pickup_date)) {
+            throw new \InvalidArgumentException('non-nullable pickup_date cannot be null');
         }
-        $this->container['rental_id'] = $rental_id;
+        $this->container['pickup_date'] = $pickup_date;
 
         return $this;
     }
 
     /**
-     * Gets rating
+     * Gets dropoff_date
      *
-     * @return int|null
+     * @return \DateTime
      */
-    public function getRating()
+    public function getDropoffDate()
     {
-        return $this->container['rating'];
+        return $this->container['dropoff_date'];
     }
 
     /**
-     * Sets rating
+     * Sets dropoff_date
      *
-     * @param int|null $rating rating
+     * @param \DateTime $dropoff_date dropoff_date
      *
      * @return self
      */
-    public function setRating($rating)
+    public function setDropoffDate($dropoff_date)
     {
-        if (is_null($rating)) {
-            throw new \InvalidArgumentException('non-nullable rating cannot be null');
+        if (is_null($dropoff_date)) {
+            throw new \InvalidArgumentException('non-nullable dropoff_date cannot be null');
         }
-        $this->container['rating'] = $rating;
+        $this->container['dropoff_date'] = $dropoff_date;
 
         return $this;
     }
 
     /**
-     * Gets comment
+     * Gets pickup_location
      *
-     * @return string|null
+     * @return \OpenAPI\Client\models\CarLocationDto
      */
-    public function getComment()
+    public function getPickupLocation()
     {
-        return $this->container['comment'];
+        return $this->container['pickup_location'];
     }
 
     /**
-     * Sets comment
+     * Sets pickup_location
      *
-     * @param string|null $comment comment
+     * @param \OpenAPI\Client\models\CarLocationDto $pickup_location pickup_location
      *
      * @return self
      */
-    public function setComment($comment)
+    public function setPickupLocation($pickup_location)
     {
-        if (is_null($comment)) {
-            throw new \InvalidArgumentException('non-nullable comment cannot be null');
+        if (is_null($pickup_location)) {
+            throw new \InvalidArgumentException('non-nullable pickup_location cannot be null');
         }
-        $this->container['comment'] = $comment;
+        $this->container['pickup_location'] = $pickup_location;
+
+        return $this;
+    }
+
+    /**
+     * Gets dropoff_location
+     *
+     * @return \OpenAPI\Client\models\CarLocationDto
+     */
+    public function getDropoffLocation()
+    {
+        return $this->container['dropoff_location'];
+    }
+
+    /**
+     * Sets dropoff_location
+     *
+     * @param \OpenAPI\Client\models\CarLocationDto $dropoff_location dropoff_location
+     *
+     * @return self
+     */
+    public function setDropoffLocation($dropoff_location)
+    {
+        if (is_null($dropoff_location)) {
+            throw new \InvalidArgumentException('non-nullable dropoff_location cannot be null');
+        }
+        $this->container['dropoff_location'] = $dropoff_location;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * CarReviewApi
+ * PaymentApi
  * PHP version 8.1
  *
  * @category Class
@@ -43,14 +43,14 @@ use OpenAPI\Client\HeaderSelector;
 use OpenAPI\Client\ObjectSerializer;
 
 /**
- * CarReviewApi Class Doc Comment
+ * PaymentApi Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CarReviewApi
+class PaymentApi
 {
     /**
      * @var ClientInterface
@@ -74,13 +74,11 @@ class CarReviewApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'apiReviewsCarIdGet' => [
+        'apiPaymentsMethodsGet' => [
             'application/json',
         ],
-        'apiReviewsCarIdPost' => [
+        'apiPaymentsPost' => [
             'application/json',
-            'text/json',
-            'application/*+json',
         ],
     ];
 
@@ -131,34 +129,32 @@ class CarReviewApi
     }
 
     /**
-     * Operation apiReviewsCarIdGet
+     * Operation apiPaymentsMethodsGet
      *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsMethodsGet'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\models\ReviewDto[]
+     * @return \OpenAPI\Client\models\PaymentMethodDto[]
      */
-    public function apiReviewsCarIdGet($id, string $contentType = self::contentTypes['apiReviewsCarIdGet'][0])
+    public function apiPaymentsMethodsGet(string $contentType = self::contentTypes['apiPaymentsMethodsGet'][0])
     {
-        list($response) = $this->apiReviewsCarIdGetWithHttpInfo($id, $contentType);
+        list($response) = $this->apiPaymentsMethodsGetWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation apiReviewsCarIdGetWithHttpInfo
+     * Operation apiPaymentsMethodsGetWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsMethodsGet'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\models\ReviewDto[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\models\PaymentMethodDto[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiReviewsCarIdGetWithHttpInfo($id, string $contentType = self::contentTypes['apiReviewsCarIdGet'][0])
+    public function apiPaymentsMethodsGetWithHttpInfo(string $contentType = self::contentTypes['apiPaymentsMethodsGet'][0])
     {
-        $request = $this->apiReviewsCarIdGetRequest($id, $contentType);
+        $request = $this->apiPaymentsMethodsGetRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -186,7 +182,7 @@ class CarReviewApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\models\ReviewDto[]',
+                        '\OpenAPI\Client\models\PaymentMethodDto[]',
                         $request,
                         $response,
                     );
@@ -208,7 +204,7 @@ class CarReviewApi
             }
 
             return $this->handleResponseWithDataType(
-                '\OpenAPI\Client\models\ReviewDto[]',
+                '\OpenAPI\Client\models\PaymentMethodDto[]',
                 $request,
                 $response,
             );
@@ -217,7 +213,7 @@ class CarReviewApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\models\ReviewDto[]',
+                        '\OpenAPI\Client\models\PaymentMethodDto[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -230,17 +226,16 @@ class CarReviewApi
     }
 
     /**
-     * Operation apiReviewsCarIdGetAsync
+     * Operation apiPaymentsMethodsGetAsync
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsMethodsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiReviewsCarIdGetAsync($id, string $contentType = self::contentTypes['apiReviewsCarIdGet'][0])
+    public function apiPaymentsMethodsGetAsync(string $contentType = self::contentTypes['apiPaymentsMethodsGet'][0])
     {
-        return $this->apiReviewsCarIdGetAsyncWithHttpInfo($id, $contentType)
+        return $this->apiPaymentsMethodsGetAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -249,18 +244,17 @@ class CarReviewApi
     }
 
     /**
-     * Operation apiReviewsCarIdGetAsyncWithHttpInfo
+     * Operation apiPaymentsMethodsGetAsyncWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsMethodsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiReviewsCarIdGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['apiReviewsCarIdGet'][0])
+    public function apiPaymentsMethodsGetAsyncWithHttpInfo(string $contentType = self::contentTypes['apiPaymentsMethodsGet'][0])
     {
-        $returnType = '\OpenAPI\Client\models\ReviewDto[]';
-        $request = $this->apiReviewsCarIdGetRequest($id, $contentType);
+        $returnType = '\OpenAPI\Client\models\PaymentMethodDto[]';
+        $request = $this->apiPaymentsMethodsGetRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -299,26 +293,18 @@ class CarReviewApi
     }
 
     /**
-     * Create request for operation 'apiReviewsCarIdGet'
+     * Create request for operation 'apiPaymentsMethodsGet'
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsMethodsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function apiReviewsCarIdGetRequest($id, string $contentType = self::contentTypes['apiReviewsCarIdGet'][0])
+    public function apiPaymentsMethodsGetRequest(string $contentType = self::contentTypes['apiPaymentsMethodsGet'][0])
     {
 
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling apiReviewsCarIdGet'
-            );
-        }
 
-
-        $resourcePath = '/api/reviews/car/{id}';
+        $resourcePath = '/api/payments/methods';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -327,14 +313,6 @@ class CarReviewApi
 
 
 
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -391,36 +369,31 @@ class CarReviewApi
     }
 
     /**
-     * Operation apiReviewsCarIdPost
+     * Operation apiPaymentsPost
      *
-     * @param  string $id id (required)
-     * @param  \OpenAPI\Client\models\LeaveReviewCommand $leave_review_command leave_review_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsPost'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return string
+     * @return void
      */
-    public function apiReviewsCarIdPost($id, $leave_review_command, string $contentType = self::contentTypes['apiReviewsCarIdPost'][0])
+    public function apiPaymentsPost(string $contentType = self::contentTypes['apiPaymentsPost'][0])
     {
-        list($response) = $this->apiReviewsCarIdPostWithHttpInfo($id, $leave_review_command, $contentType);
-        return $response;
+        $this->apiPaymentsPostWithHttpInfo($contentType);
     }
 
     /**
-     * Operation apiReviewsCarIdPostWithHttpInfo
+     * Operation apiPaymentsPostWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\LeaveReviewCommand $leave_review_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsPost'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiReviewsCarIdPostWithHttpInfo($id, $leave_review_command, string $contentType = self::contentTypes['apiReviewsCarIdPost'][0])
+    public function apiPaymentsPostWithHttpInfo(string $contentType = self::contentTypes['apiPaymentsPost'][0])
     {
-        $request = $this->apiReviewsCarIdPostRequest($id, $leave_review_command, $contentType);
+        $request = $this->apiPaymentsPostRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -445,45 +418,9 @@ class CarReviewApi
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            return [null, $statusCode, $response->getHeaders()];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'string',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
             }
         
 
@@ -492,18 +429,16 @@ class CarReviewApi
     }
 
     /**
-     * Operation apiReviewsCarIdPostAsync
+     * Operation apiPaymentsPostAsync
      *
-     * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\LeaveReviewCommand $leave_review_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiReviewsCarIdPostAsync($id, $leave_review_command, string $contentType = self::contentTypes['apiReviewsCarIdPost'][0])
+    public function apiPaymentsPostAsync(string $contentType = self::contentTypes['apiPaymentsPost'][0])
     {
-        return $this->apiReviewsCarIdPostAsyncWithHttpInfo($id, $leave_review_command, $contentType)
+        return $this->apiPaymentsPostAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -512,38 +447,23 @@ class CarReviewApi
     }
 
     /**
-     * Operation apiReviewsCarIdPostAsyncWithHttpInfo
+     * Operation apiPaymentsPostAsyncWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\LeaveReviewCommand $leave_review_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiReviewsCarIdPostAsyncWithHttpInfo($id, $leave_review_command, string $contentType = self::contentTypes['apiReviewsCarIdPost'][0])
+    public function apiPaymentsPostAsyncWithHttpInfo(string $contentType = self::contentTypes['apiPaymentsPost'][0])
     {
-        $returnType = 'string';
-        $request = $this->apiReviewsCarIdPostRequest($id, $leave_review_command, $contentType);
+        $returnType = '';
+        $request = $this->apiPaymentsPostRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -563,34 +483,18 @@ class CarReviewApi
     }
 
     /**
-     * Create request for operation 'apiReviewsCarIdPost'
+     * Create request for operation 'apiPaymentsPost'
      *
-     * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\LeaveReviewCommand $leave_review_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiReviewsCarIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiPaymentsPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function apiReviewsCarIdPostRequest($id, $leave_review_command, string $contentType = self::contentTypes['apiReviewsCarIdPost'][0])
+    public function apiPaymentsPostRequest(string $contentType = self::contentTypes['apiPaymentsPost'][0])
     {
 
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling apiReviewsCarIdPost'
-            );
-        }
 
-        // verify the required parameter 'leave_review_command' is set
-        if ($leave_review_command === null || (is_array($leave_review_command) && count($leave_review_command) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $leave_review_command when calling apiReviewsCarIdPost'
-            );
-        }
-
-
-        $resourcePath = '/api/reviews/car/{id}';
+        $resourcePath = '/api/payments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -599,31 +503,16 @@ class CarReviewApi
 
 
 
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['text/plain', 'application/json', 'text/json', ],
+            [],
             $contentType,
             $multipart
         );
 
         // for model (json/xml)
-        if (isset($leave_review_command)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($leave_review_command));
-            } else {
-                $httpBody = $leave_review_command;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

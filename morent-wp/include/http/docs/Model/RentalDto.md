@@ -1,4 +1,4 @@
-# # ReviewDto
+# # RentalDto
 
 ## Properties
 
@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  |
 **user_id** | **string** |  |
-**user_name** | **string** |  |
 **car_id** | **string** |  |
-**rating** | **int** |  |
-**comment** | **string** |  |
+**pickup_date** | **\DateTime** |  |
+**dropoff_date** | **\DateTime** |  |
+**pickup_location** | [**\OpenAPI\Client\models\CarLocationDto**](CarLocationDto.md) |  |
+**dropoff_location** | [**\OpenAPI\Client\models\CarLocationDto**](CarLocationDto.md) |  |
+**total_cost** | **float** |  |
+**currency** | **string** |  |
+**status** | **string** |  |
 **created_at** | **\DateTime** |  |
-**user_image_url** | **string** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

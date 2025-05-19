@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDtoTest
+ * UserCarsReviewDtoTest
  *
  * PHP version 8.1
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserDtoTest Class Doc Comment
+ * UserCarsReviewDtoTest Class Doc Comment
  *
  * @category    Class
- * @description UserDto
+ * @description UserCarsReviewDto
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UserDtoTest extends TestCase
+class UserCarsReviewDtoTest extends TestCase
 {
 
     /**
@@ -71,45 +71,63 @@ class UserDtoTest extends TestCase
     }
 
     /**
-     * Test "UserDto"
+     * Test "UserCarsReviewDto"
      */
-    public function testUserDto()
+    public function testUserCarsReviewDto()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_id"
+     * Test attribute "rental"
      */
-    public function testPropertyUserId()
+    public function testPropertyRental()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "image_url"
+     * Test attribute "car"
      */
-    public function testPropertyImageUrl()
+    public function testPropertyCar()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "car_image_url"
      */
-    public function testPropertyName()
+    public function testPropertyCarImageUrl()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "rating"
      */
-    public function testPropertyEmail()
+    public function testPropertyRating()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "comment"
+     */
+    public function testPropertyComment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_reviewed"
+     */
+    public function testPropertyIsReviewed()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

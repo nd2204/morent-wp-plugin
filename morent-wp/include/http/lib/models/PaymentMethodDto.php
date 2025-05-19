@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDto
+ * PaymentMethodDto
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * UserDto Class Doc Comment
+ * PaymentMethodDto Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -40,7 +40,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentMethodDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserDto';
+    protected static $openAPIModelName = 'PaymentMethodDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_id' => 'string',
-        'image_url' => 'string',
         'name' => 'string',
-        'email' => 'string'
+        'logo_url' => 'string',
+        'fee_percent' => 'float'
     ];
 
     /**
@@ -71,10 +70,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user_id' => 'uuid',
-        'image_url' => null,
         'name' => null,
-        'email' => null
+        'logo_url' => null,
+        'fee_percent' => 'double'
     ];
 
     /**
@@ -83,10 +81,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user_id' => false,
-        'image_url' => false,
         'name' => false,
-        'email' => false
+        'logo_url' => false,
+        'fee_percent' => false
     ];
 
     /**
@@ -175,10 +172,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'user_id' => 'userId',
-        'image_url' => 'imageUrl',
         'name' => 'name',
-        'email' => 'email'
+        'logo_url' => 'logoUrl',
+        'fee_percent' => 'feePercent'
     ];
 
     /**
@@ -187,10 +183,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'user_id' => 'setUserId',
-        'image_url' => 'setImageUrl',
         'name' => 'setName',
-        'email' => 'setEmail'
+        'logo_url' => 'setLogoUrl',
+        'fee_percent' => 'setFeePercent'
     ];
 
     /**
@@ -199,10 +194,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'user_id' => 'getUserId',
-        'image_url' => 'getImageUrl',
         'name' => 'getName',
-        'email' => 'getEmail'
+        'logo_url' => 'getLogoUrl',
+        'fee_percent' => 'getFeePercent'
     ];
 
     /**
@@ -262,10 +256,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('user_id', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('logo_url', $data ?? [], null);
+        $this->setIfExists('fee_percent', $data ?? [], null);
     }
 
     /**
@@ -295,17 +288,14 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['user_id'] === null) {
-            $invalidProperties[] = "'user_id' can't be null";
-        }
-        if ($this->container['image_url'] === null) {
-            $invalidProperties[] = "'image_url' can't be null";
-        }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
+        if ($this->container['logo_url'] === null) {
+            $invalidProperties[] = "'logo_url' can't be null";
+        }
+        if ($this->container['fee_percent'] === null) {
+            $invalidProperties[] = "'fee_percent' can't be null";
         }
         return $invalidProperties;
     }
@@ -321,60 +311,6 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets user_id
-     *
-     * @return string
-     */
-    public function getUserId()
-    {
-        return $this->container['user_id'];
-    }
-
-    /**
-     * Sets user_id
-     *
-     * @param string $user_id user_id
-     *
-     * @return self
-     */
-    public function setUserId($user_id)
-    {
-        if (is_null($user_id)) {
-            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
-        }
-        $this->container['user_id'] = $user_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets image_url
-     *
-     * @return string
-     */
-    public function getImageUrl()
-    {
-        return $this->container['image_url'];
-    }
-
-    /**
-     * Sets image_url
-     *
-     * @param string $image_url image_url
-     *
-     * @return self
-     */
-    public function setImageUrl($image_url)
-    {
-        if (is_null($image_url)) {
-            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
-        }
-        $this->container['image_url'] = $image_url;
-
-        return $this;
-    }
 
     /**
      * Gets name
@@ -404,28 +340,55 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets email
+     * Gets logo_url
      *
      * @return string
      */
-    public function getEmail()
+    public function getLogoUrl()
     {
-        return $this->container['email'];
+        return $this->container['logo_url'];
     }
 
     /**
-     * Sets email
+     * Sets logo_url
      *
-     * @param string $email email
+     * @param string $logo_url logo_url
      *
      * @return self
      */
-    public function setEmail($email)
+    public function setLogoUrl($logo_url)
     {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        if (is_null($logo_url)) {
+            throw new \InvalidArgumentException('non-nullable logo_url cannot be null');
         }
-        $this->container['email'] = $email;
+        $this->container['logo_url'] = $logo_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets fee_percent
+     *
+     * @return float
+     */
+    public function getFeePercent()
+    {
+        return $this->container['fee_percent'];
+    }
+
+    /**
+     * Sets fee_percent
+     *
+     * @param float $fee_percent fee_percent
+     *
+     * @return self
+     */
+    public function setFeePercent($fee_percent)
+    {
+        if (is_null($fee_percent)) {
+            throw new \InvalidArgumentException('non-nullable fee_percent cannot be null');
+        }
+        $this->container['fee_percent'] = $fee_percent;
 
         return $this;
     }

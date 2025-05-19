@@ -63,7 +63,8 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'gear_box' => 'string',
         'fuel_tank_capacity' => 'int',
         'year' => 'int',
-        'seat_capacity' => 'int'
+        'seat_capacity' => 'int',
+        'type' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'gear_box' => null,
         'fuel_tank_capacity' => 'int32',
         'year' => 'int32',
-        'seat_capacity' => 'int32'
+        'seat_capacity' => 'int32',
+        'type' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'gear_box' => false,
         'fuel_tank_capacity' => false,
         'year' => false,
-        'seat_capacity' => false
+        'seat_capacity' => false,
+        'type' => false
     ];
 
     /**
@@ -190,7 +193,8 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'gear_box' => 'gearBox',
         'fuel_tank_capacity' => 'fuelTankCapacity',
         'year' => 'year',
-        'seat_capacity' => 'seatCapacity'
+        'seat_capacity' => 'seatCapacity',
+        'type' => 'type'
     ];
 
     /**
@@ -205,7 +209,8 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'gear_box' => 'setGearBox',
         'fuel_tank_capacity' => 'setFuelTankCapacity',
         'year' => 'setYear',
-        'seat_capacity' => 'setSeatCapacity'
+        'seat_capacity' => 'setSeatCapacity',
+        'type' => 'setType'
     ];
 
     /**
@@ -220,7 +225,8 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'gear_box' => 'getGearBox',
         'fuel_tank_capacity' => 'getFuelTankCapacity',
         'year' => 'getYear',
-        'seat_capacity' => 'getSeatCapacity'
+        'seat_capacity' => 'getSeatCapacity',
+        'type' => 'getType'
     ];
 
     /**
@@ -287,6 +293,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('fuel_tank_capacity', $data ?? [], null);
         $this->setIfExists('year', $data ?? [], null);
         $this->setIfExists('seat_capacity', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
     }
 
     /**
@@ -316,6 +323,30 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['brand'] === null) {
+            $invalidProperties[] = "'brand' can't be null";
+        }
+        if ($this->container['model'] === null) {
+            $invalidProperties[] = "'model' can't be null";
+        }
+        if ($this->container['fuel_type'] === null) {
+            $invalidProperties[] = "'fuel_type' can't be null";
+        }
+        if ($this->container['gear_box'] === null) {
+            $invalidProperties[] = "'gear_box' can't be null";
+        }
+        if ($this->container['fuel_tank_capacity'] === null) {
+            $invalidProperties[] = "'fuel_tank_capacity' can't be null";
+        }
+        if ($this->container['year'] === null) {
+            $invalidProperties[] = "'year' can't be null";
+        }
+        if ($this->container['seat_capacity'] === null) {
+            $invalidProperties[] = "'seat_capacity' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -334,7 +365,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets brand
      *
-     * @return string|null
+     * @return string
      */
     public function getBrand()
     {
@@ -344,7 +375,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets brand
      *
-     * @param string|null $brand brand
+     * @param string $brand brand
      *
      * @return self
      */
@@ -361,7 +392,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets model
      *
-     * @return string|null
+     * @return string
      */
     public function getModel()
     {
@@ -371,7 +402,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets model
      *
-     * @param string|null $model model
+     * @param string $model model
      *
      * @return self
      */
@@ -388,7 +419,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets fuel_type
      *
-     * @return string|null
+     * @return string
      */
     public function getFuelType()
     {
@@ -398,7 +429,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fuel_type
      *
-     * @param string|null $fuel_type fuel_type
+     * @param string $fuel_type fuel_type
      *
      * @return self
      */
@@ -415,7 +446,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets gear_box
      *
-     * @return string|null
+     * @return string
      */
     public function getGearBox()
     {
@@ -425,7 +456,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets gear_box
      *
-     * @param string|null $gear_box gear_box
+     * @param string $gear_box gear_box
      *
      * @return self
      */
@@ -442,7 +473,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets fuel_tank_capacity
      *
-     * @return int|null
+     * @return int
      */
     public function getFuelTankCapacity()
     {
@@ -452,7 +483,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fuel_tank_capacity
      *
-     * @param int|null $fuel_tank_capacity fuel_tank_capacity
+     * @param int $fuel_tank_capacity fuel_tank_capacity
      *
      * @return self
      */
@@ -469,7 +500,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets year
      *
-     * @return int|null
+     * @return int
      */
     public function getYear()
     {
@@ -479,7 +510,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets year
      *
-     * @param int|null $year year
+     * @param int $year year
      *
      * @return self
      */
@@ -496,7 +527,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets seat_capacity
      *
-     * @return int|null
+     * @return int
      */
     public function getSeatCapacity()
     {
@@ -506,7 +537,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets seat_capacity
      *
-     * @param int|null $seat_capacity seat_capacity
+     * @param int $seat_capacity seat_capacity
      *
      * @return self
      */
@@ -516,6 +547,33 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable seat_capacity cannot be null');
         }
         $this->container['seat_capacity'] = $seat_capacity;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+        $this->container['type'] = $type;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * CarDto
+ * ValidationProblemDetails
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CarDto Class Doc Comment
+ * ValidationProblemDetails Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -40,7 +40,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class ValidationProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CarDto';
+    protected static $openAPIModelName = 'ValidationProblemDetails';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
+        'type' => 'string',
         'title' => 'string',
-        'car_model' => '\OpenAPI\Client\models\CarModelDto',
-        'license_plate' => 'string',
-        'price_per_day' => 'float',
-        'currency' => 'string',
-        'images' => '\OpenAPI\Client\models\CarImageDto[]',
-        'is_available' => 'bool',
-        'average_rating' => 'float',
-        'reviews_count' => 'int'
+        'status' => 'int',
+        'detail' => 'string',
+        'instance' => 'string',
+        'errors' => 'array<string,string[]>'
     ];
 
     /**
@@ -77,16 +73,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
+        'type' => null,
         'title' => null,
-        'car_model' => null,
-        'license_plate' => null,
-        'price_per_day' => 'double',
-        'currency' => null,
-        'images' => null,
-        'is_available' => null,
-        'average_rating' => 'double',
-        'reviews_count' => 'int32'
+        'status' => 'int32',
+        'detail' => null,
+        'instance' => null,
+        'errors' => null
     ];
 
     /**
@@ -95,16 +87,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'title' => false,
-        'car_model' => false,
-        'license_plate' => false,
-        'price_per_day' => false,
-        'currency' => false,
-        'images' => false,
-        'is_available' => false,
-        'average_rating' => false,
-        'reviews_count' => false
+        'type' => true,
+        'title' => true,
+        'status' => true,
+        'detail' => true,
+        'instance' => true,
+        'errors' => false
     ];
 
     /**
@@ -193,16 +181,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
+        'type' => 'type',
         'title' => 'title',
-        'car_model' => 'carModel',
-        'license_plate' => 'licensePlate',
-        'price_per_day' => 'pricePerDay',
-        'currency' => 'currency',
-        'images' => 'images',
-        'is_available' => 'isAvailable',
-        'average_rating' => 'averageRating',
-        'reviews_count' => 'reviewsCount'
+        'status' => 'status',
+        'detail' => 'detail',
+        'instance' => 'instance',
+        'errors' => 'errors'
     ];
 
     /**
@@ -211,16 +195,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
+        'type' => 'setType',
         'title' => 'setTitle',
-        'car_model' => 'setCarModel',
-        'license_plate' => 'setLicensePlate',
-        'price_per_day' => 'setPricePerDay',
-        'currency' => 'setCurrency',
-        'images' => 'setImages',
-        'is_available' => 'setIsAvailable',
-        'average_rating' => 'setAverageRating',
-        'reviews_count' => 'setReviewsCount'
+        'status' => 'setStatus',
+        'detail' => 'setDetail',
+        'instance' => 'setInstance',
+        'errors' => 'setErrors'
     ];
 
     /**
@@ -229,16 +209,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
+        'type' => 'getType',
         'title' => 'getTitle',
-        'car_model' => 'getCarModel',
-        'license_plate' => 'getLicensePlate',
-        'price_per_day' => 'getPricePerDay',
-        'currency' => 'getCurrency',
-        'images' => 'getImages',
-        'is_available' => 'getIsAvailable',
-        'average_rating' => 'getAverageRating',
-        'reviews_count' => 'getReviewsCount'
+        'status' => 'getStatus',
+        'detail' => 'getDetail',
+        'instance' => 'getInstance',
+        'errors' => 'getErrors'
     ];
 
     /**
@@ -298,16 +274,12 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('car_model', $data ?? [], null);
-        $this->setIfExists('license_plate', $data ?? [], null);
-        $this->setIfExists('price_per_day', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('images', $data ?? [], null);
-        $this->setIfExists('is_available', $data ?? [], null);
-        $this->setIfExists('average_rating', $data ?? [], null);
-        $this->setIfExists('reviews_count', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
+        $this->setIfExists('instance', $data ?? [], null);
+        $this->setIfExists('errors', $data ?? [], null);
     }
 
     /**
@@ -337,36 +309,6 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
-        if ($this->container['car_model'] === null) {
-            $invalidProperties[] = "'car_model' can't be null";
-        }
-        if ($this->container['license_plate'] === null) {
-            $invalidProperties[] = "'license_plate' can't be null";
-        }
-        if ($this->container['price_per_day'] === null) {
-            $invalidProperties[] = "'price_per_day' can't be null";
-        }
-        if ($this->container['currency'] === null) {
-            $invalidProperties[] = "'currency' can't be null";
-        }
-        if ($this->container['images'] === null) {
-            $invalidProperties[] = "'images' can't be null";
-        }
-        if ($this->container['is_available'] === null) {
-            $invalidProperties[] = "'is_available' can't be null";
-        }
-        if ($this->container['average_rating'] === null) {
-            $invalidProperties[] = "'average_rating' can't be null";
-        }
-        if ($this->container['reviews_count'] === null) {
-            $invalidProperties[] = "'reviews_count' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -383,28 +325,35 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets type
      *
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getType()
     {
-        return $this->container['id'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets id
+     * Sets type
      *
-     * @param string $id id
+     * @param string|null $type type
      *
      * @return self
      */
-    public function setId($id)
+    public function setType($type)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($type)) {
+            array_push($this->openAPINullablesSetToNull, 'type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['id'] = $id;
+        $this->container['type'] = $type;
 
         return $this;
     }
@@ -412,7 +361,7 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets title
      *
-     * @return string
+     * @return string|null
      */
     public function getTitle()
     {
@@ -422,14 +371,21 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param string $title title
+     * @param string|null $title title
      *
      * @return self
      */
     public function setTitle($title)
     {
         if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['title'] = $title;
 
@@ -437,217 +393,130 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets car_model
+     * Gets status
      *
-     * @return \OpenAPI\Client\models\CarModelDto
+     * @return int|null
      */
-    public function getCarModel()
+    public function getStatus()
     {
-        return $this->container['car_model'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets car_model
+     * Sets status
      *
-     * @param \OpenAPI\Client\models\CarModelDto $car_model car_model
+     * @param int|null $status status
      *
      * @return self
      */
-    public function setCarModel($car_model)
+    public function setStatus($status)
     {
-        if (is_null($car_model)) {
-            throw new \InvalidArgumentException('non-nullable car_model cannot be null');
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['car_model'] = $car_model;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets license_plate
+     * Gets detail
      *
-     * @return string
+     * @return string|null
      */
-    public function getLicensePlate()
+    public function getDetail()
     {
-        return $this->container['license_plate'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets license_plate
+     * Sets detail
      *
-     * @param string $license_plate license_plate
+     * @param string|null $detail detail
      *
      * @return self
      */
-    public function setLicensePlate($license_plate)
+    public function setDetail($detail)
     {
-        if (is_null($license_plate)) {
-            throw new \InvalidArgumentException('non-nullable license_plate cannot be null');
+        if (is_null($detail)) {
+            array_push($this->openAPINullablesSetToNull, 'detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['license_plate'] = $license_plate;
+        $this->container['detail'] = $detail;
 
         return $this;
     }
 
     /**
-     * Gets price_per_day
+     * Gets instance
      *
-     * @return float
+     * @return string|null
      */
-    public function getPricePerDay()
+    public function getInstance()
     {
-        return $this->container['price_per_day'];
+        return $this->container['instance'];
     }
 
     /**
-     * Sets price_per_day
+     * Sets instance
      *
-     * @param float $price_per_day price_per_day
+     * @param string|null $instance instance
      *
      * @return self
      */
-    public function setPricePerDay($price_per_day)
+    public function setInstance($instance)
     {
-        if (is_null($price_per_day)) {
-            throw new \InvalidArgumentException('non-nullable price_per_day cannot be null');
+        if (is_null($instance)) {
+            array_push($this->openAPINullablesSetToNull, 'instance');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('instance', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['price_per_day'] = $price_per_day;
+        $this->container['instance'] = $instance;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets errors
      *
-     * @return string
+     * @return array<string,string[]>|null
      */
-    public function getCurrency()
+    public function getErrors()
     {
-        return $this->container['currency'];
+        return $this->container['errors'];
     }
 
     /**
-     * Sets currency
+     * Sets errors
      *
-     * @param string $currency currency
+     * @param array<string,string[]>|null $errors errors
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setErrors($errors)
     {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($errors)) {
+            throw new \InvalidArgumentException('non-nullable errors cannot be null');
         }
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets images
-     *
-     * @return \OpenAPI\Client\models\CarImageDto[]
-     */
-    public function getImages()
-    {
-        return $this->container['images'];
-    }
-
-    /**
-     * Sets images
-     *
-     * @param \OpenAPI\Client\models\CarImageDto[] $images images
-     *
-     * @return self
-     */
-    public function setImages($images)
-    {
-        if (is_null($images)) {
-            throw new \InvalidArgumentException('non-nullable images cannot be null');
-        }
-        $this->container['images'] = $images;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_available
-     *
-     * @return bool
-     */
-    public function getIsAvailable()
-    {
-        return $this->container['is_available'];
-    }
-
-    /**
-     * Sets is_available
-     *
-     * @param bool $is_available is_available
-     *
-     * @return self
-     */
-    public function setIsAvailable($is_available)
-    {
-        if (is_null($is_available)) {
-            throw new \InvalidArgumentException('non-nullable is_available cannot be null');
-        }
-        $this->container['is_available'] = $is_available;
-
-        return $this;
-    }
-
-    /**
-     * Gets average_rating
-     *
-     * @return float
-     */
-    public function getAverageRating()
-    {
-        return $this->container['average_rating'];
-    }
-
-    /**
-     * Sets average_rating
-     *
-     * @param float $average_rating average_rating
-     *
-     * @return self
-     */
-    public function setAverageRating($average_rating)
-    {
-        if (is_null($average_rating)) {
-            throw new \InvalidArgumentException('non-nullable average_rating cannot be null');
-        }
-        $this->container['average_rating'] = $average_rating;
-
-        return $this;
-    }
-
-    /**
-     * Gets reviews_count
-     *
-     * @return int
-     */
-    public function getReviewsCount()
-    {
-        return $this->container['reviews_count'];
-    }
-
-    /**
-     * Sets reviews_count
-     *
-     * @param int $reviews_count reviews_count
-     *
-     * @return self
-     */
-    public function setReviewsCount($reviews_count)
-    {
-        if (is_null($reviews_count)) {
-            throw new \InvalidArgumentException('non-nullable reviews_count cannot be null');
-        }
-        $this->container['reviews_count'] = $reviews_count;
+        $this->container['errors'] = $errors;
 
         return $this;
     }

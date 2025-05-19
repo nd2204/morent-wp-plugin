@@ -116,6 +116,15 @@ class CarDetailDtoTest extends TestCase
     }
 
     /**
+     * Test attribute "title"
+     */
+    public function testPropertyTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "car_model"
      */
     public function testPropertyCarModel()

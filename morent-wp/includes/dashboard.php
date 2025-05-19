@@ -1,13 +1,4 @@
 <?php
-if (!sm_is_logged_in()) {
-    echo "<script>location.href='" . admin_url('admin.php?page=Morent_dashboard') . "'</script>";
-    exit;
-}
-
-$user = $_SESSION['Morent_user'];
-?>
-
-<?php
 // Sample data for the car rental dashboard
 $rentalDetails = [
     'carModel' => 'Nissan GT - R',
@@ -69,14 +60,23 @@ $recentTransactions = [
     <title>Car Rental Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Leaflet Routing Machine CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
 </head>
 <body>
     <div class="dashboard">
         <!-- Left Panel - Rental Details -->
         <div class="left-panel">
             <div class="card">
-                <h3>Details Rental</h3>
+                <div class="card-header">
+                    <h3>Details Rental</h3>
+                    <button class="btn btn-outline" id="reset_map">Reset</button>
+                </div>
                 <div id="map"></div>
                 <div class="car-info">
                     <img src="https://i.imgur.com/ZyTJ2gC.png" alt="Car" />
@@ -89,7 +89,7 @@ $recentTransactions = [
                 <div class="section">
                     <div class="radio-section">🔵 <span>Pick - Up</span></div>
                     <div class="inputs">
-                        <select><option>Kota Semarang</option></select>
+                        <input type="text" id="pickup_location"/>
                         <input type="date" value="2022-07-20" />
                         <input type="time" value="07:00" />
                     </div>
@@ -97,7 +97,7 @@ $recentTransactions = [
                 <div class="section">
                     <div class="radio-section">🔘 <span>Drop - Off</span></div>
                     <div class="inputs">
-                        <select><option>Kota Semarang</option></select>
+                        <input type="text" id="dropoff_location"/>
                         <input type="date" value="2022-07-21" />
                         <input type="time" value="01:00" />
                     </div>
@@ -108,7 +108,7 @@ $recentTransactions = [
                         <p class="sub-label">Overall price and includes rental discount</p>
                     </div>
                     <div>
-                        <span style="font-size: 1.6rem;">$80.00</span>
+                        <span style="font-size: 1.6rem;" id="total_price">$0.00</span>
                     </div>
                 </div>
             </div>
@@ -179,47 +179,119 @@ $recentTransactions = [
         });
     </script>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        const map = L.map('map').setView([-6.9667, 110.4167], 13);
+        function getAddress(latlng, callback) {
+            const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`;
+            fetch(url)
+                .then(res => res.json())
+                .then(data => callback(data.display_name))
+        }
+
+        function getAddressPromise(latlng) {
+            return fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`)
+                .then(res => res.json())
+                .then(data => data.display_name || "Không rõ địa chỉ")
+                .catch(() => "Không tìm thấy địa chỉ");
+        }
+
+
+        const defaultLatLng = [21.0285, 105.8542]; // Hà Nội
+        const map = L.map('map').setView(defaultLatLng, 13);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
+        let routingControl = null;
+        let clickCount = 0;
+        let waypoints = [];
+        let markers = [];
+        let addresses = []; // ✅ Địa chỉ nơi đi / đến
 
-                const userLocation = L.latLng(lat, lng);
-                L.marker(userLocation, {
-                    icon: L.icon({
-                        iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
-                        iconSize: [32, 32],
-                        iconAnchor: [16, 32]
+        map.on('click', function (e) {
+            const latlng = e.latlng;
+
+            if (clickCount < 2) {
+                waypoints.push(latlng);
+                clickCount++;
+
+                if (clickCount === 2) {
+                    if (routingControl) {
+                        map.removeControl(routingControl);
+                    }
+
+                    routingControl = L.Routing.control({
+                        waypoints: waypoints,
+                        routeWhileDragging: false,
+                        showAlternatives: false,
+                        addWaypoints: false,
+                        language: 'en',
+                        createMarker: function (i, wp) {
+                            const marker = L.marker(wp.latLng, { draggable: false });
+                            const label = i === 0 ? "Nơi đi" : "Nơi đến";
+
+                            // Gọi API lấy địa chỉ
+                            getAddress(wp.latLng, function (address) {
+                                marker.bindPopup(`${label}<br>${address}`).openPopup();
+                            });
+
+                            return marker;
+                        }
                     })
-                }).addTo(map).bindPopup("Vị trí của bạn").openPopup();
+                    .on('routesfound', function (e) {
+                        const route = e.routes[0];
+                        const distance = (route.summary.totalDistance / 1000).toFixed(2);
+                        const time = Math.round(route.summary.totalTime / 60);
 
-                map.setView(userLocation, 14);
-            }, function(error) {
-                alert("Không thể lấy vị trí hiện tại: " + error.message);
+                        // Lấy địa chỉ sau khi đã có route
+                        Promise.all([
+                            getAddressPromise(waypoints[0]),
+                            getAddressPromise(waypoints[1])
+                        ]).then(([addr1, addr2]) => {
+                            document.getElementById('pickup_location').value = addr1;
+                            document.getElementById('dropoff_location').value = addr2;
+                            console.log(
+                                `Nơi đi: ${addr1}\n` +
+                                `Nơi đến: ${addr2}\n` +
+                                `Quãng đường: ${distance} km\n` +
+                                `Thời gian dự kiến: ${time} phút`
+                            );
+                            document.getElementById('total_price').innerText = `$${(time * 0.5).toFixed(2)}`;
+                        });
+                    })
+                    .addTo(map);
+                }
+            }
+        });
+
+        // Nút Reset
+        document.getElementById('reset_map').addEventListener('click', function () {
+            // Xóa markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            // Xóa tuyến đường
+            if (routingControl) {
+                map.removeControl(routingControl);
+                routingControl = null;
+            }
+
+            // Xóa polyline
+            map.eachLayer(function (layer) {
+                if (layer instanceof L.Polyline && !(layer instanceof L.Polygon)) {
+                    map.removeLayer(layer);
+                }
             });
-        } else {
-            const pointA = L.latLng(-6.9667, 110.4167);
-            const pointB = L.latLng(-6.9567, 110.4267);
-            const polyline = L.polyline([pointA, pointB], { color: 'blue' }).addTo(map);
-            L.marker(pointB).addTo(map);
-            map.fitBounds(polyline.getBounds());
-            alert("Trình duyệt không hỗ trợ định vị.");
-        }
+
+            // Reset biến
+            waypoints = [];
+            clickCount = 0;
+            addresses = [];
+
+            // Đặt lại bản đồ về Hà Nội
+            map.setView(defaultLatLng, 13);
+        });
     </script>
+
 </body>
 </html>
-
-<?php
-if (isset($_GET['logout'])) {
-    unset($_SESSION['Morent_user']);
-    echo "<script>location.href='" . admin_url('admin.php?page=Morent_dashboard') . "'</script>";
-}
-?>

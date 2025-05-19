@@ -1,6 +1,6 @@
 <?php
 /**
- * LeaveReviewCommandTest
+ * RentalDtoTest
  *
  * PHP version 8.1
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * LeaveReviewCommandTest Class Doc Comment
+ * RentalDtoTest Class Doc Comment
  *
  * @category    Class
- * @description LeaveReviewCommand
+ * @description RentalDto
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class LeaveReviewCommandTest extends TestCase
+class RentalDtoTest extends TestCase
 {
 
     /**
@@ -71,9 +71,18 @@ class LeaveReviewCommandTest extends TestCase
     }
 
     /**
-     * Test "LeaveReviewCommand"
+     * Test "RentalDto"
      */
-    public function testLeaveReviewCommand()
+    public function testRentalDto()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "id"
+     */
+    public function testPropertyId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -98,27 +107,72 @@ class LeaveReviewCommandTest extends TestCase
     }
 
     /**
-     * Test attribute "rental_id"
+     * Test attribute "pickup_date"
      */
-    public function testPropertyRentalId()
+    public function testPropertyPickupDate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "rating"
+     * Test attribute "dropoff_date"
      */
-    public function testPropertyRating()
+    public function testPropertyDropoffDate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "comment"
+     * Test attribute "pickup_location"
      */
-    public function testPropertyComment()
+    public function testPropertyPickupLocation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "dropoff_location"
+     */
+    public function testPropertyDropoffLocation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "total_cost"
+     */
+    public function testPropertyTotalCost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currency"
+     */
+    public function testPropertyCurrency()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "created_at"
+     */
+    public function testPropertyCreatedAt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

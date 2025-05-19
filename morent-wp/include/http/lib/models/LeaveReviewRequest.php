@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDto
+ * LeaveReviewRequest
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * UserDto Class Doc Comment
+ * LeaveReviewRequest Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -40,7 +40,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class LeaveReviewRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserDto';
+    protected static $openAPIModelName = 'LeaveReviewRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_id' => 'string',
-        'image_url' => 'string',
-        'name' => 'string',
-        'email' => 'string'
+        'rental_id' => 'string',
+        'rating' => 'int',
+        'comment' => 'string'
     ];
 
     /**
@@ -71,10 +70,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user_id' => 'uuid',
-        'image_url' => null,
-        'name' => null,
-        'email' => null
+        'rental_id' => 'uuid',
+        'rating' => 'int32',
+        'comment' => null
     ];
 
     /**
@@ -83,10 +81,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user_id' => false,
-        'image_url' => false,
-        'name' => false,
-        'email' => false
+        'rental_id' => false,
+        'rating' => false,
+        'comment' => false
     ];
 
     /**
@@ -175,10 +172,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'user_id' => 'userId',
-        'image_url' => 'imageUrl',
-        'name' => 'name',
-        'email' => 'email'
+        'rental_id' => 'rentalId',
+        'rating' => 'rating',
+        'comment' => 'comment'
     ];
 
     /**
@@ -187,10 +183,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'user_id' => 'setUserId',
-        'image_url' => 'setImageUrl',
-        'name' => 'setName',
-        'email' => 'setEmail'
+        'rental_id' => 'setRentalId',
+        'rating' => 'setRating',
+        'comment' => 'setComment'
     ];
 
     /**
@@ -199,10 +194,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'user_id' => 'getUserId',
-        'image_url' => 'getImageUrl',
-        'name' => 'getName',
-        'email' => 'getEmail'
+        'rental_id' => 'getRentalId',
+        'rating' => 'getRating',
+        'comment' => 'getComment'
     ];
 
     /**
@@ -262,10 +256,9 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('user_id', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('rental_id', $data ?? [], null);
+        $this->setIfExists('rating', $data ?? [], null);
+        $this->setIfExists('comment', $data ?? [], null);
     }
 
     /**
@@ -295,17 +288,14 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['user_id'] === null) {
-            $invalidProperties[] = "'user_id' can't be null";
+        if ($this->container['rental_id'] === null) {
+            $invalidProperties[] = "'rental_id' can't be null";
         }
-        if ($this->container['image_url'] === null) {
-            $invalidProperties[] = "'image_url' can't be null";
+        if ($this->container['rating'] === null) {
+            $invalidProperties[] = "'rating' can't be null";
         }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
+        if ($this->container['comment'] === null) {
+            $invalidProperties[] = "'comment' can't be null";
         }
         return $invalidProperties;
     }
@@ -323,109 +313,82 @@ class UserDto implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets user_id
+     * Gets rental_id
      *
      * @return string
      */
-    public function getUserId()
+    public function getRentalId()
     {
-        return $this->container['user_id'];
+        return $this->container['rental_id'];
     }
 
     /**
-     * Sets user_id
+     * Sets rental_id
      *
-     * @param string $user_id user_id
+     * @param string $rental_id rental_id
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setRentalId($rental_id)
     {
-        if (is_null($user_id)) {
-            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
+        if (is_null($rental_id)) {
+            throw new \InvalidArgumentException('non-nullable rental_id cannot be null');
         }
-        $this->container['user_id'] = $user_id;
+        $this->container['rental_id'] = $rental_id;
 
         return $this;
     }
 
     /**
-     * Gets image_url
+     * Gets rating
      *
-     * @return string
+     * @return int
      */
-    public function getImageUrl()
+    public function getRating()
     {
-        return $this->container['image_url'];
+        return $this->container['rating'];
     }
 
     /**
-     * Sets image_url
+     * Sets rating
      *
-     * @param string $image_url image_url
+     * @param int $rating rating
      *
      * @return self
      */
-    public function setImageUrl($image_url)
+    public function setRating($rating)
     {
-        if (is_null($image_url)) {
-            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
+        if (is_null($rating)) {
+            throw new \InvalidArgumentException('non-nullable rating cannot be null');
         }
-        $this->container['image_url'] = $image_url;
+        $this->container['rating'] = $rating;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets comment
      *
      * @return string
      */
-    public function getName()
+    public function getComment()
     {
-        return $this->container['name'];
+        return $this->container['comment'];
     }
 
     /**
-     * Sets name
+     * Sets comment
      *
-     * @param string $name name
+     * @param string $comment comment
      *
      * @return self
      */
-    public function setName($name)
+    public function setComment($comment)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($comment)) {
+            throw new \InvalidArgumentException('non-nullable comment cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email email
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
+        $this->container['comment'] = $comment;
 
         return $this;
     }

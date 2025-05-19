@@ -288,6 +288,15 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['city'] === null) {
+            $invalidProperties[] = "'city' can't be null";
+        }
+        if ($this->container['address'] === null) {
+            $invalidProperties[] = "'address' can't be null";
+        }
+        if ($this->container['country'] === null) {
+            $invalidProperties[] = "'country' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -306,7 +315,7 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets city
      *
-     * @return string|null
+     * @return string
      */
     public function getCity()
     {
@@ -316,7 +325,7 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets city
      *
-     * @param string|null $city city
+     * @param string $city city
      *
      * @return self
      */
@@ -333,7 +342,7 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets address
      *
-     * @return string|null
+     * @return string
      */
     public function getAddress()
     {
@@ -343,7 +352,7 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets address
      *
-     * @param string|null $address address
+     * @param string $address address
      *
      * @return self
      */
@@ -360,7 +369,7 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets country
      *
-     * @return string|null
+     * @return string
      */
     public function getCountry()
     {
@@ -370,7 +379,7 @@ class CarLocationDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets country
      *
-     * @param string|null $country country
+     * @param string $country country
      *
      * @return self
      */

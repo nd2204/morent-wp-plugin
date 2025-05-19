@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDtoTest
+ * LeaveReviewRequestTest
  *
  * PHP version 8.1
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserDtoTest Class Doc Comment
+ * LeaveReviewRequestTest Class Doc Comment
  *
  * @category    Class
- * @description UserDto
+ * @description LeaveReviewRequest
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UserDtoTest extends TestCase
+class LeaveReviewRequestTest extends TestCase
 {
 
     /**
@@ -71,45 +71,36 @@ class UserDtoTest extends TestCase
     }
 
     /**
-     * Test "UserDto"
+     * Test "LeaveReviewRequest"
      */
-    public function testUserDto()
+    public function testLeaveReviewRequest()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_id"
+     * Test attribute "rental_id"
      */
-    public function testPropertyUserId()
+    public function testPropertyRentalId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "image_url"
+     * Test attribute "rating"
      */
-    public function testPropertyImageUrl()
+    public function testPropertyRating()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "comment"
      */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "email"
-     */
-    public function testPropertyEmail()
+    public function testPropertyComment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

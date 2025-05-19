@@ -295,6 +295,12 @@ class CarImageDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['image_id'] === null) {
+            $invalidProperties[] = "'image_id' can't be null";
+        }
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -313,7 +319,7 @@ class CarImageDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets image_id
      *
-     * @return string|null
+     * @return string
      */
     public function getImageId()
     {
@@ -323,7 +329,7 @@ class CarImageDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets image_id
      *
-     * @param string|null $image_id image_id
+     * @param string $image_id image_id
      *
      * @return self
      */
@@ -340,7 +346,7 @@ class CarImageDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets url
      *
-     * @return string|null
+     * @return string
      */
     public function getUrl()
     {
@@ -350,7 +356,7 @@ class CarImageDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url url
+     * @param string $url url
      *
      * @return self
      */

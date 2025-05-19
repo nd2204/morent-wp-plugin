@@ -49,16 +49,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new OpenAPI\Client\Api\AuthApi(
+$apiInstance = new OpenAPI\Client\Api\AdminApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
+$car_id = 'car_id_example'; // string
+$image_id = 'image_id_example'; // string
 
 try {
-    $apiInstance->apiAuthGoogleCallbackGet();
+    $apiInstance->apiAdminCarCarIdImagesImageIdPost($car_id, $image_id);
 } catch (Exception $e) {
-    echo 'Exception when calling AuthApi->apiAuthGoogleCallbackGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AdminApi->apiAdminCarCarIdImagesImageIdPost: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -69,27 +71,35 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AdminApi* | [**apiAdminCarCarIdImagesImageIdPost**](docs/Api/AdminApi.md#apiadmincarcaridimagesimageidpost) | **POST** /api/admin/car/{carId}/images/{imageId} | 
+*AdminApi* | [**apiAdminCarCarIdImagesImageIdSetPrimaryPut**](docs/Api/AdminApi.md#apiadmincarcaridimagesimageidsetprimaryput) | **PUT** /api/admin/car/{carId}/images/{imageId}/set-primary | 
+*AdminApi* | [**apiAdminCarCarIdImagesPost**](docs/Api/AdminApi.md#apiadmincarcaridimagespost) | **POST** /api/admin/car/{carId}/images | 
+*AdminApi* | [**apiAdminCarCarIdImagesReorderPut**](docs/Api/AdminApi.md#apiadmincarcaridimagesreorderput) | **PUT** /api/admin/car/{carId}/images/reorder | 
+*AdminApi* | [**apiAdminCarIdDelete**](docs/Api/AdminApi.md#apiadmincariddelete) | **DELETE** /api/admin/car/{id} | 
+*AdminApi* | [**apiAdminCarIdPut**](docs/Api/AdminApi.md#apiadmincaridput) | **PUT** /api/admin/car/{id} | 
+*AdminApi* | [**apiAdminCarPost**](docs/Api/AdminApi.md#apiadmincarpost) | **POST** /api/admin/car | 
 *AuthApi* | [**apiAuthGoogleCallbackGet**](docs/Api/AuthApi.md#apiauthgooglecallbackget) | **GET** /api/auth/google-callback | 
 *AuthApi* | [**apiAuthGoogleLoginGet**](docs/Api/AuthApi.md#apiauthgoogleloginget) | **GET** /api/auth/google-login | 
 *AuthApi* | [**apiAuthLoginPost**](docs/Api/AuthApi.md#apiauthloginpost) | **POST** /api/auth/login | 
 *AuthApi* | [**apiAuthLogoutPost**](docs/Api/AuthApi.md#apiauthlogoutpost) | **POST** /api/auth/logout | 
 *AuthApi* | [**apiAuthRefreshPost**](docs/Api/AuthApi.md#apiauthrefreshpost) | **POST** /api/auth/refresh | 
 *AuthApi* | [**apiAuthRegisterPost**](docs/Api/AuthApi.md#apiauthregisterpost) | **POST** /api/auth/register | 
-*CarImagesApi* | [**apiCarsCarIdImagesGet**](docs/Api/CarImagesApi.md#apicarscaridimagesget) | **GET** /api/cars/{carId}/images | 
-*CarImagesApi* | [**apiCarsCarIdImagesImageIdDelete**](docs/Api/CarImagesApi.md#apicarscaridimagesimageiddelete) | **DELETE** /api/cars/{carId}/images/{imageId} | 
-*CarImagesApi* | [**apiCarsCarIdImagesImageIdSetPrimaryPut**](docs/Api/CarImagesApi.md#apicarscaridimagesimageidsetprimaryput) | **PUT** /api/cars/{carId}/images/{imageId}/set-primary | 
-*CarImagesApi* | [**apiCarsCarIdImagesPost**](docs/Api/CarImagesApi.md#apicarscaridimagespost) | **POST** /api/cars/{carId}/images | 
-*CarImagesApi* | [**apiCarsCarIdImagesReorderPut**](docs/Api/CarImagesApi.md#apicarscaridimagesreorderput) | **PUT** /api/cars/{carId}/images/reorder | 
-*CarReviewApi* | [**apiReviewsCarIdGet**](docs/Api/CarReviewApi.md#apireviewscaridget) | **GET** /api/reviews/car/{id} | 
-*CarReviewApi* | [**apiReviewsCarIdPost**](docs/Api/CarReviewApi.md#apireviewscaridpost) | **POST** /api/reviews/car/{id} | 
-*CarsApi* | [**apiCarsGet**](docs/Api/CarsApi.md#apicarsget) | **GET** /api/cars | 
-*CarsApi* | [**apiCarsIdDelete**](docs/Api/CarsApi.md#apicarsiddelete) | **DELETE** /api/cars/{id} | 
-*CarsApi* | [**apiCarsIdGet**](docs/Api/CarsApi.md#apicarsidget) | **GET** /api/cars/{id} | 
-*CarsApi* | [**apiCarsIdPut**](docs/Api/CarsApi.md#apicarsidput) | **PUT** /api/cars/{id} | 
-*CarsApi* | [**apiCarsPost**](docs/Api/CarsApi.md#apicarspost) | **POST** /api/cars | 
-*UserProfileApi* | [**apiUsersUserIdProfileImageDelete**](docs/Api/UserProfileApi.md#apiusersuseridprofileimagedelete) | **DELETE** /api/users/{userId}/profile-image | 
-*UserProfileApi* | [**apiUsersUserIdProfileImageGet**](docs/Api/UserProfileApi.md#apiusersuseridprofileimageget) | **GET** /api/users/{userId}/profile-image | 
-*UserProfileApi* | [**apiUsersUserIdProfileImagePost**](docs/Api/UserProfileApi.md#apiusersuseridprofileimagepost) | **POST** /api/users/{userId}/profile-image | 
+*CarApi* | [**apiCarsCarIdImagesGet**](docs/Api/CarApi.md#apicarscaridimagesget) | **GET** /api/cars/{carId}/images | 
+*CarApi* | [**apiCarsGet**](docs/Api/CarApi.md#apicarsget) | **GET** /api/cars | 
+*CarApi* | [**apiCarsIdGet**](docs/Api/CarApi.md#apicarsidget) | **GET** /api/cars/{id} | 
+*CarApi* | [**apiCarsIdReviewsGet**](docs/Api/CarApi.md#apicarsidreviewsget) | **GET** /api/cars/{id}/reviews | 
+*PaymentApi* | [**apiPaymentsMethodsGet**](docs/Api/PaymentApi.md#apipaymentsmethodsget) | **GET** /api/payments/methods | 
+*PaymentApi* | [**apiPaymentsPost**](docs/Api/PaymentApi.md#apipaymentspost) | **POST** /api/payments | 
+*UserApi* | [**apiUsersMeGet**](docs/Api/UserApi.md#apiusersmeget) | **GET** /api/users/me | 
+*UserApi* | [**apiUsersMeProfileImageDelete**](docs/Api/UserApi.md#apiusersmeprofileimagedelete) | **DELETE** /api/users/me/profile-image | 
+*UserApi* | [**apiUsersMeProfileImageGet**](docs/Api/UserApi.md#apiusersmeprofileimageget) | **GET** /api/users/me/profile-image | 
+*UserApi* | [**apiUsersMeProfileImagePost**](docs/Api/UserApi.md#apiusersmeprofileimagepost) | **POST** /api/users/me/profile-image | 
+*UserApi* | [**apiUsersMeRentalsGet**](docs/Api/UserApi.md#apiusersmerentalsget) | **GET** /api/users/me/rentals | 
+*UserApi* | [**apiUsersMeRentalsPost**](docs/Api/UserApi.md#apiusersmerentalspost) | **POST** /api/users/me/rentals | 
+*UserApi* | [**apiUsersMeReviewsGet**](docs/Api/UserApi.md#apiusersmereviewsget) | **GET** /api/users/me/reviews | 
+*UserApi* | [**apiUsersMeReviewsPost**](docs/Api/UserApi.md#apiusersmereviewspost) | **POST** /api/users/me/reviews | 
+*UserApi* | [**apiUsersMeReviewsReviewIdPut**](docs/Api/UserApi.md#apiusersmereviewsreviewidput) | **PUT** /api/users/me/reviews/{reviewId} | 
+*UserApi* | [**apiUsersUserIdProfileImageGet**](docs/Api/UserApi.md#apiusersuseridprofileimageget) | **GET** /api/users/{userId}/profile-image | 
 
 ## Models
 
@@ -101,16 +111,22 @@ Class | Method | HTTP request | Description
 - [CarLocationDto](docs/Model/CarLocationDto.md)
 - [CarModelDto](docs/Model/CarModelDto.md)
 - [CreateCarCommand](docs/Model/CreateCarCommand.md)
-- [LeaveReviewCommand](docs/Model/LeaveReviewCommand.md)
+- [CreateRentalRequest](docs/Model/CreateRentalRequest.md)
+- [LeaveReviewRequest](docs/Model/LeaveReviewRequest.md)
 - [LoginRequest](docs/Model/LoginRequest.md)
+- [PaymentMethodDto](docs/Model/PaymentMethodDto.md)
 - [ProblemDetails](docs/Model/ProblemDetails.md)
 - [RefreshTokenRequest](docs/Model/RefreshTokenRequest.md)
 - [RegisterUserCommand](docs/Model/RegisterUserCommand.md)
+- [RentalDto](docs/Model/RentalDto.md)
 - [ReviewDto](docs/Model/ReviewDto.md)
 - [UpdateCarCommand](docs/Model/UpdateCarCommand.md)
+- [UpdateReviewRequest](docs/Model/UpdateReviewRequest.md)
 - [UploadCarImageRequest](docs/Model/UploadCarImageRequest.md)
+- [UserCarsReviewDto](docs/Model/UserCarsReviewDto.md)
 - [UserDto](docs/Model/UserDto.md)
 - [UserProfileImageDto](docs/Model/UserProfileImageDto.md)
+- [ValidationProblemDetails](docs/Model/ValidationProblemDetails.md)
 
 ## Authorization
 Endpoints do not require authorization.

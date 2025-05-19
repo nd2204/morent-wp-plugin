@@ -1,6 +1,6 @@
 <?php
 /**
- * UserProfileApiTest
+ * PaymentApiTest
  * PHP version 8.1
  *
  * @category Class
@@ -33,14 +33,14 @@ use \OpenAPI\Client\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserProfileApiTest Class Doc Comment
+ * PaymentApiTest Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class UserProfileApiTest extends TestCase
+class PaymentApiTest extends TestCase
 {
 
     /**
@@ -72,36 +72,24 @@ class UserProfileApiTest extends TestCase
     }
 
     /**
-     * Test case for apiUsersUserIdProfileImageDelete
+     * Test case for apiPaymentsMethodsGet
      *
      * .
      *
      */
-    public function testApiUsersUserIdProfileImageDelete()
+    public function testApiPaymentsMethodsGet()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for apiUsersUserIdProfileImageGet
+     * Test case for apiPaymentsPost
      *
      * .
      *
      */
-    public function testApiUsersUserIdProfileImageGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for apiUsersUserIdProfileImagePost
-     *
-     * .
-     *
-     */
-    public function testApiUsersUserIdProfileImagePost()
+    public function testApiPaymentsPost()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

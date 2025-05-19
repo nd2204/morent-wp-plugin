@@ -534,7 +534,7 @@ class AuthApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\models\AuthResponse|\OpenAPI\Client\models\ProblemDetails|\OpenAPI\Client\models\ProblemDetails
+     * @return \OpenAPI\Client\models\ValidationProblemDetails|\OpenAPI\Client\models\ValidationProblemDetails|\OpenAPI\Client\models\ValidationProblemDetails
      */
     public function apiAuthLoginPost($login_request, string $contentType = self::contentTypes['apiAuthLoginPost'][0])
     {
@@ -550,7 +550,7 @@ class AuthApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\models\AuthResponse|\OpenAPI\Client\models\ProblemDetails|\OpenAPI\Client\models\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\models\ValidationProblemDetails|\OpenAPI\Client\models\ValidationProblemDetails|\OpenAPI\Client\models\ValidationProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiAuthLoginPostWithHttpInfo($login_request, string $contentType = self::contentTypes['apiAuthLoginPost'][0])
     {
@@ -582,19 +582,19 @@ class AuthApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\models\AuthResponse',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $request,
                         $response,
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\models\ProblemDetails',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $request,
                         $response,
                     );
                 case 404:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\models\ProblemDetails',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $request,
                         $response,
                     );
@@ -616,7 +616,7 @@ class AuthApi
             }
 
             return $this->handleResponseWithDataType(
-                '\OpenAPI\Client\models\AuthResponse',
+                '\OpenAPI\Client\models\ValidationProblemDetails',
                 $request,
                 $response,
             );
@@ -625,7 +625,7 @@ class AuthApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\models\AuthResponse',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -633,7 +633,7 @@ class AuthApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\models\ProblemDetails',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -641,7 +641,7 @@ class AuthApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\models\ProblemDetails',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -683,7 +683,7 @@ class AuthApi
      */
     public function apiAuthLoginPostAsyncWithHttpInfo($login_request, string $contentType = self::contentTypes['apiAuthLoginPost'][0])
     {
-        $returnType = '\OpenAPI\Client\models\AuthResponse';
+        $returnType = '\OpenAPI\Client\models\ValidationProblemDetails';
         $request = $this->apiAuthLoginPostRequest($login_request, $contentType);
 
         return $this->client
@@ -1270,7 +1270,7 @@ class AuthApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\models\AuthResponse|\OpenAPI\Client\models\ProblemDetails
+     * @return \OpenAPI\Client\models\AuthResponse|\OpenAPI\Client\models\ValidationProblemDetails
      */
     public function apiAuthRegisterPost($register_user_command, string $contentType = self::contentTypes['apiAuthRegisterPost'][0])
     {
@@ -1286,7 +1286,7 @@ class AuthApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\models\AuthResponse|\OpenAPI\Client\models\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\models\AuthResponse|\OpenAPI\Client\models\ValidationProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiAuthRegisterPostWithHttpInfo($register_user_command, string $contentType = self::contentTypes['apiAuthRegisterPost'][0])
     {
@@ -1324,7 +1324,7 @@ class AuthApi
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\models\ProblemDetails',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $request,
                         $response,
                     );
@@ -1363,7 +1363,7 @@ class AuthApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\models\ProblemDetails',
+                        '\OpenAPI\Client\models\ValidationProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

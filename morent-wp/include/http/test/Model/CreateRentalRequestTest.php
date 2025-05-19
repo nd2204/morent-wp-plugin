@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDtoTest
+ * CreateRentalRequestTest
  *
  * PHP version 8.1
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserDtoTest Class Doc Comment
+ * CreateRentalRequestTest Class Doc Comment
  *
  * @category    Class
- * @description UserDto
+ * @description CreateRentalRequest
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UserDtoTest extends TestCase
+class CreateRentalRequestTest extends TestCase
 {
 
     /**
@@ -71,45 +71,54 @@ class UserDtoTest extends TestCase
     }
 
     /**
-     * Test "UserDto"
+     * Test "CreateRentalRequest"
      */
-    public function testUserDto()
+    public function testCreateRentalRequest()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_id"
+     * Test attribute "car_id"
      */
-    public function testPropertyUserId()
+    public function testPropertyCarId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "image_url"
+     * Test attribute "pickup_date"
      */
-    public function testPropertyImageUrl()
+    public function testPropertyPickupDate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "dropoff_date"
      */
-    public function testPropertyName()
+    public function testPropertyDropoffDate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "pickup_location"
      */
-    public function testPropertyEmail()
+    public function testPropertyPickupLocation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "dropoff_location"
+     */
+    public function testPropertyDropoffLocation()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

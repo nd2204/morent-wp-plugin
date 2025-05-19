@@ -1,6 +1,6 @@
 <?php
 /**
- * CarImagesApiTest
+ * UserApiTest
  * PHP version 8.1
  *
  * @category Class
@@ -33,14 +33,14 @@ use \OpenAPI\Client\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CarImagesApiTest Class Doc Comment
+ * UserApiTest Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CarImagesApiTest extends TestCase
+class UserApiTest extends TestCase
 {
 
     /**
@@ -72,60 +72,120 @@ class CarImagesApiTest extends TestCase
     }
 
     /**
-     * Test case for apiCarsCarIdImagesGet
+     * Test case for apiUsersMeGet
      *
      * .
      *
      */
-    public function testApiCarsCarIdImagesGet()
+    public function testApiUsersMeGet()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for apiCarsCarIdImagesImageIdDelete
+     * Test case for apiUsersMeProfileImageDelete
      *
      * .
      *
      */
-    public function testApiCarsCarIdImagesImageIdDelete()
+    public function testApiUsersMeProfileImageDelete()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for apiCarsCarIdImagesImageIdSetPrimaryPut
+     * Test case for apiUsersMeProfileImageGet
      *
      * .
      *
      */
-    public function testApiCarsCarIdImagesImageIdSetPrimaryPut()
+    public function testApiUsersMeProfileImageGet()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for apiCarsCarIdImagesPost
+     * Test case for apiUsersMeProfileImagePost
      *
      * .
      *
      */
-    public function testApiCarsCarIdImagesPost()
+    public function testApiUsersMeProfileImagePost()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for apiCarsCarIdImagesReorderPut
+     * Test case for apiUsersMeRentalsGet
      *
      * .
      *
      */
-    public function testApiCarsCarIdImagesReorderPut()
+    public function testApiUsersMeRentalsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for apiUsersMeRentalsPost
+     *
+     * .
+     *
+     */
+    public function testApiUsersMeRentalsPost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for apiUsersMeReviewsGet
+     *
+     * .
+     *
+     */
+    public function testApiUsersMeReviewsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for apiUsersMeReviewsPost
+     *
+     * .
+     *
+     */
+    public function testApiUsersMeReviewsPost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for apiUsersMeReviewsReviewIdPut
+     *
+     * .
+     *
+     */
+    public function testApiUsersMeReviewsReviewIdPut()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for apiUsersUserIdProfileImageGet
+     *
+     * .
+     *
+     */
+    public function testApiUsersUserIdProfileImageGet()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

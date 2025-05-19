@@ -295,6 +295,18 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['access_token'] === null) {
+            $invalidProperties[] = "'access_token' can't be null";
+        }
+        if ($this->container['refresh_token'] === null) {
+            $invalidProperties[] = "'refresh_token' can't be null";
+        }
+        if ($this->container['expires_at'] === null) {
+            $invalidProperties[] = "'expires_at' can't be null";
+        }
+        if ($this->container['user'] === null) {
+            $invalidProperties[] = "'user' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -313,7 +325,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets access_token
      *
-     * @return string|null
+     * @return string
      */
     public function getAccessToken()
     {
@@ -323,7 +335,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets access_token
      *
-     * @param string|null $access_token access_token
+     * @param string $access_token access_token
      *
      * @return self
      */
@@ -340,7 +352,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets refresh_token
      *
-     * @return string|null
+     * @return string
      */
     public function getRefreshToken()
     {
@@ -350,7 +362,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets refresh_token
      *
-     * @param string|null $refresh_token refresh_token
+     * @param string $refresh_token refresh_token
      *
      * @return self
      */
@@ -367,7 +379,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets expires_at
      *
-     * @return \DateTime|null
+     * @return \DateTime
      */
     public function getExpiresAt()
     {
@@ -377,7 +389,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime $expires_at expires_at
      *
      * @return self
      */
@@ -394,7 +406,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets user
      *
-     * @return \OpenAPI\Client\models\UserDto|null
+     * @return \OpenAPI\Client\models\UserDto
      */
     public function getUser()
     {
@@ -404,7 +416,7 @@ class AuthResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets user
      *
-     * @param \OpenAPI\Client\models\UserDto|null $user user
+     * @param \OpenAPI\Client\models\UserDto $user user
      *
      * @return self
      */

@@ -115,7 +115,7 @@ No authorization required
 ## `apiAuthLoginPost()`
 
 ```php
-apiAuthLoginPost($login_request): \OpenAPI\Client\models\AuthResponse
+apiAuthLoginPost($login_request): \OpenAPI\Client\models\ValidationProblemDetails
 ```
 
 
@@ -151,7 +151,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\models\AuthResponse**](../Model/AuthResponse.md)
+[**\OpenAPI\Client\models\ValidationProblemDetails**](../Model/ValidationProblemDetails.md)
 
 ### Authorization
 

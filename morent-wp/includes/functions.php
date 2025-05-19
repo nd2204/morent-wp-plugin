@@ -1,13 +1,13 @@
 <?php
-function sm_dashboard_page() {
-    if (!sm_is_logged_in()) {
-        include SM_PLUGIN_DIR . 'includes/login-form.php';
-    } else {
-        include SM_PLUGIN_DIR . 'includes/dashboard.php';
-    }
+function mr_dashboard_page() {
+    include MR_PLUGIN_DIR . 'includes/dashboard.php';
+    // if (!mr_is_logged_in()) {
+    //     include MR_PLUGIN_DIR . 'includes/login-form.php';
+    // } else {
+    // }
 }
 
-function sm_is_logged_in() {
+function mr_is_logged_in() {
     return isset($_SESSION['Morent_user']);
 }
 
@@ -15,14 +15,14 @@ add_action('init', function () {
     if (!session_id()) session_start();
 });
 
-function sm_car_rent_page() {
-    include SM_PLUGIN_DIR . 'includes/CarRent.php';
+function mr_car_rent_page() {
+    include MR_PLUGIN_DIR . 'includes/CarRent.php';
 }
 
-function sm_insights_page() {
-    include SM_PLUGIN_DIR . 'includes/insights.php';
+function mr_insights_page() {
+    include MR_PLUGIN_DIR . 'includes/insights.php';
 }
 
-function sm_reimburse_page() {
-    include SM_PLUGIN_DIR . 'includes/reimburse.php';
+function mr_reimburse_page() {
+    include MR_PLUGIN_DIR . 'includes/reimburse.php';
 }

@@ -1,16 +1,14 @@
-# # ReviewDto
+# # UserCarsReviewDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  |
-**user_id** | **string** |  |
-**user_name** | **string** |  |
-**car_id** | **string** |  |
+**rental** | [**\OpenAPI\Client\models\RentalDto**](RentalDto.md) |  |
+**car** | [**\OpenAPI\Client\models\CarDto**](CarDto.md) |  |
+**car_image_url** | **string** |  |
 **rating** | **int** |  |
 **comment** | **string** |  |
-**created_at** | **\DateTime** |  |
-**user_image_url** | **string** |  |
+**is_reviewed** | **bool** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

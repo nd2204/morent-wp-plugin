@@ -274,6 +274,9 @@ class RefreshTokenRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
+        if ($this->container['refresh_token'] === null) {
+            $invalidProperties[] = "'refresh_token' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -292,7 +295,7 @@ class RefreshTokenRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets refresh_token
      *
-     * @return string|null
+     * @return string
      */
     public function getRefreshToken()
     {
@@ -302,7 +305,7 @@ class RefreshTokenRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets refresh_token
      *
-     * @param string|null $refresh_token refresh_token
+     * @param string $refresh_token refresh_token
      *
      * @return self
      */

@@ -116,15 +116,6 @@ class ReviewDtoTest extends TestCase
     }
 
     /**
-     * Test attribute "car_details"
-     */
-    public function testPropertyCarDetails()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "rating"
      */
     public function testPropertyRating()
@@ -152,9 +143,9 @@ class ReviewDtoTest extends TestCase
     }
 
     /**
-     * Test attribute "image_url"
+     * Test attribute "user_image_url"
      */
-    public function testPropertyImageUrl()
+    public function testPropertyUserImageUrl()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

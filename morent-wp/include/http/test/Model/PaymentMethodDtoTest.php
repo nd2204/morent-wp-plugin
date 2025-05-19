@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDtoTest
+ * PaymentMethodDtoTest
  *
  * PHP version 8.1
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserDtoTest Class Doc Comment
+ * PaymentMethodDtoTest Class Doc Comment
  *
  * @category    Class
- * @description UserDto
+ * @description PaymentMethodDto
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UserDtoTest extends TestCase
+class PaymentMethodDtoTest extends TestCase
 {
 
     /**
@@ -71,27 +71,9 @@ class UserDtoTest extends TestCase
     }
 
     /**
-     * Test "UserDto"
+     * Test "PaymentMethodDto"
      */
-    public function testUserDto()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "user_id"
-     */
-    public function testPropertyUserId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "image_url"
-     */
-    public function testPropertyImageUrl()
+    public function testPaymentMethodDto()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -107,9 +89,18 @@ class UserDtoTest extends TestCase
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "logo_url"
      */
-    public function testPropertyEmail()
+    public function testPropertyLogoUrl()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fee_percent"
+     */
+    public function testPropertyFeePercent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

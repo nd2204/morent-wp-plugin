@@ -1,6 +1,6 @@
 <?php
 /**
- * CarsApi
+ * CarApi
  * PHP version 8.1
  *
  * @category Class
@@ -43,14 +43,14 @@ use OpenAPI\Client\HeaderSelector;
 use OpenAPI\Client\ObjectSerializer;
 
 /**
- * CarsApi Class Doc Comment
+ * CarApi Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CarsApi
+class CarApi
 {
     /**
      * @var ClientInterface
@@ -74,24 +74,17 @@ class CarsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'apiCarsGet' => [
+        'apiCarsCarIdImagesGet' => [
             'application/json',
         ],
-        'apiCarsIdDelete' => [
+        'apiCarsGet' => [
             'application/json',
         ],
         'apiCarsIdGet' => [
             'application/json',
         ],
-        'apiCarsIdPut' => [
+        'apiCarsIdReviewsGet' => [
             'application/json',
-            'text/json',
-            'application/*+json',
-        ],
-        'apiCarsPost' => [
-            'application/json',
-            'text/json',
-            'application/*+json',
         ],
     ];
 
@@ -139,6 +132,280 @@ class CarsApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation apiCarsCarIdImagesGet
+     *
+     * @param  string $car_id car_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsCarIdImagesGet'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\models\CarImageDto[]|\OpenAPI\Client\models\ProblemDetails
+     */
+    public function apiCarsCarIdImagesGet($car_id, string $contentType = self::contentTypes['apiCarsCarIdImagesGet'][0])
+    {
+        list($response) = $this->apiCarsCarIdImagesGetWithHttpInfo($car_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation apiCarsCarIdImagesGetWithHttpInfo
+     *
+     * @param  string $car_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsCarIdImagesGet'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\models\CarImageDto[]|\OpenAPI\Client\models\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function apiCarsCarIdImagesGetWithHttpInfo($car_id, string $contentType = self::contentTypes['apiCarsCarIdImagesGet'][0])
+    {
+        $request = $this->apiCarsCarIdImagesGetRequest($car_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\models\CarImageDto[]',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\models\ProblemDetails',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\models\CarImageDto[]',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\models\CarImageDto[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\models\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation apiCarsCarIdImagesGetAsync
+     *
+     * @param  string $car_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsCarIdImagesGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function apiCarsCarIdImagesGetAsync($car_id, string $contentType = self::contentTypes['apiCarsCarIdImagesGet'][0])
+    {
+        return $this->apiCarsCarIdImagesGetAsyncWithHttpInfo($car_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation apiCarsCarIdImagesGetAsyncWithHttpInfo
+     *
+     * @param  string $car_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsCarIdImagesGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function apiCarsCarIdImagesGetAsyncWithHttpInfo($car_id, string $contentType = self::contentTypes['apiCarsCarIdImagesGet'][0])
+    {
+        $returnType = '\OpenAPI\Client\models\CarImageDto[]';
+        $request = $this->apiCarsCarIdImagesGetRequest($car_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'apiCarsCarIdImagesGet'
+     *
+     * @param  string $car_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsCarIdImagesGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function apiCarsCarIdImagesGetRequest($car_id, string $contentType = self::contentTypes['apiCarsCarIdImagesGet'][0])
+    {
+
+        // verify the required parameter 'car_id' is set
+        if ($car_id === null || (is_array($car_id) && count($car_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $car_id when calling apiCarsCarIdImagesGet'
+            );
+        }
+
+
+        $resourcePath = '/api/cars/{carId}/images';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($car_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'carId' . '}',
+                ObjectSerializer::toPathValue($car_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**
@@ -380,21 +647,6 @@ class CarsApi
      */
     public function apiCarsGetRequest($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_location = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
     {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         $resourcePath = '/api/cars';
         $formParams = [];
         $queryParams = [];
@@ -570,216 +822,6 @@ class CarsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation apiCarsIdDelete
-     *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function apiCarsIdDelete($id, string $contentType = self::contentTypes['apiCarsIdDelete'][0])
-    {
-        $this->apiCarsIdDeleteWithHttpInfo($id, $contentType);
-    }
-
-    /**
-     * Operation apiCarsIdDeleteWithHttpInfo
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function apiCarsIdDeleteWithHttpInfo($id, string $contentType = self::contentTypes['apiCarsIdDelete'][0])
-    {
-        $request = $this->apiCarsIdDeleteRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation apiCarsIdDeleteAsync
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function apiCarsIdDeleteAsync($id, string $contentType = self::contentTypes['apiCarsIdDelete'][0])
-    {
-        return $this->apiCarsIdDeleteAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation apiCarsIdDeleteAsyncWithHttpInfo
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function apiCarsIdDeleteAsyncWithHttpInfo($id, string $contentType = self::contentTypes['apiCarsIdDelete'][0])
-    {
-        $returnType = '';
-        $request = $this->apiCarsIdDeleteRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'apiCarsIdDelete'
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function apiCarsIdDeleteRequest($id, string $contentType = self::contentTypes['apiCarsIdDelete'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling apiCarsIdDelete'
-            );
-        }
-
-
-        $resourcePath = '/api/cars/{id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1047,35 +1089,36 @@ class CarsApi
     }
 
     /**
-     * Operation apiCarsIdPut
+     * Operation apiCarsIdReviewsGet
      *
      * @param  string $id id (required)
-     * @param  \OpenAPI\Client\models\UpdateCarCommand $update_car_command update_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdPut'] to see the possible values for this operation
+     * @param  string|null $car_id car_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdReviewsGet'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \OpenAPI\Client\models\ReviewDto[]
      */
-    public function apiCarsIdPut($id, $update_car_command, string $contentType = self::contentTypes['apiCarsIdPut'][0])
+    public function apiCarsIdReviewsGet($id, $car_id = null, string $contentType = self::contentTypes['apiCarsIdReviewsGet'][0])
     {
-        $this->apiCarsIdPutWithHttpInfo($id, $update_car_command, $contentType);
+        list($response) = $this->apiCarsIdReviewsGetWithHttpInfo($id, $car_id, $contentType);
+        return $response;
     }
 
     /**
-     * Operation apiCarsIdPutWithHttpInfo
+     * Operation apiCarsIdReviewsGetWithHttpInfo
      *
      * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\UpdateCarCommand $update_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdPut'] to see the possible values for this operation
+     * @param  string|null $car_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdReviewsGet'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\models\ReviewDto[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiCarsIdPutWithHttpInfo($id, $update_car_command, string $contentType = self::contentTypes['apiCarsIdPut'][0])
+    public function apiCarsIdReviewsGetWithHttpInfo($id, $car_id = null, string $contentType = self::contentTypes['apiCarsIdReviewsGet'][0])
     {
-        $request = $this->apiCarsIdPutRequest($id, $update_car_command, $contentType);
+        $request = $this->apiCarsIdReviewsGetRequest($id, $car_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1100,9 +1143,45 @@ class CarsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\models\ReviewDto[]',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\models\ReviewDto[]',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\models\ReviewDto[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -1111,18 +1190,18 @@ class CarsApi
     }
 
     /**
-     * Operation apiCarsIdPutAsync
+     * Operation apiCarsIdReviewsGetAsync
      *
      * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\UpdateCarCommand $update_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdPut'] to see the possible values for this operation
+     * @param  string|null $car_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdReviewsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiCarsIdPutAsync($id, $update_car_command, string $contentType = self::contentTypes['apiCarsIdPut'][0])
+    public function apiCarsIdReviewsGetAsync($id, $car_id = null, string $contentType = self::contentTypes['apiCarsIdReviewsGet'][0])
     {
-        return $this->apiCarsIdPutAsyncWithHttpInfo($id, $update_car_command, $contentType)
+        return $this->apiCarsIdReviewsGetAsyncWithHttpInfo($id, $car_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1131,25 +1210,38 @@ class CarsApi
     }
 
     /**
-     * Operation apiCarsIdPutAsyncWithHttpInfo
+     * Operation apiCarsIdReviewsGetAsyncWithHttpInfo
      *
      * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\UpdateCarCommand $update_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdPut'] to see the possible values for this operation
+     * @param  string|null $car_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdReviewsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiCarsIdPutAsyncWithHttpInfo($id, $update_car_command, string $contentType = self::contentTypes['apiCarsIdPut'][0])
+    public function apiCarsIdReviewsGetAsyncWithHttpInfo($id, $car_id = null, string $contentType = self::contentTypes['apiCarsIdReviewsGet'][0])
     {
-        $returnType = '';
-        $request = $this->apiCarsIdPutRequest($id, $update_car_command, $contentType);
+        $returnType = '\OpenAPI\Client\models\ReviewDto[]';
+        $request = $this->apiCarsIdReviewsGetRequest($id, $car_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1169,40 +1261,43 @@ class CarsApi
     }
 
     /**
-     * Create request for operation 'apiCarsIdPut'
+     * Create request for operation 'apiCarsIdReviewsGet'
      *
      * @param  string $id (required)
-     * @param  \OpenAPI\Client\models\UpdateCarCommand $update_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdPut'] to see the possible values for this operation
+     * @param  string|null $car_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsIdReviewsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function apiCarsIdPutRequest($id, $update_car_command, string $contentType = self::contentTypes['apiCarsIdPut'][0])
+    public function apiCarsIdReviewsGetRequest($id, $car_id = null, string $contentType = self::contentTypes['apiCarsIdReviewsGet'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling apiCarsIdPut'
-            );
-        }
-
-        // verify the required parameter 'update_car_command' is set
-        if ($update_car_command === null || (is_array($update_car_command) && count($update_car_command) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $update_car_command when calling apiCarsIdPut'
+                'Missing the required parameter $id when calling apiCarsIdReviewsGet'
             );
         }
 
 
-        $resourcePath = '/api/cars/{id}';
+
+        $resourcePath = '/api/cars/{id}/reviews';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $car_id,
+            'carId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -1216,20 +1311,13 @@ class CarsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['text/plain', 'application/json', 'text/json', ],
             $contentType,
             $multipart
         );
 
         // for model (json/xml)
-        if (isset($update_car_command)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_car_command));
-            } else {
-                $httpBody = $update_car_command;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1268,216 +1356,7 @@ class CarsApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'PUT',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation apiCarsPost
-     *
-     * @param  \OpenAPI\Client\models\CreateCarCommand $create_car_command create_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsPost'] to see the possible values for this operation
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function apiCarsPost($create_car_command, string $contentType = self::contentTypes['apiCarsPost'][0])
-    {
-        $this->apiCarsPostWithHttpInfo($create_car_command, $contentType);
-    }
-
-    /**
-     * Operation apiCarsPostWithHttpInfo
-     *
-     * @param  \OpenAPI\Client\models\CreateCarCommand $create_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsPost'] to see the possible values for this operation
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function apiCarsPostWithHttpInfo($create_car_command, string $contentType = self::contentTypes['apiCarsPost'][0])
-    {
-        $request = $this->apiCarsPostRequest($create_car_command, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation apiCarsPostAsync
-     *
-     * @param  \OpenAPI\Client\models\CreateCarCommand $create_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function apiCarsPostAsync($create_car_command, string $contentType = self::contentTypes['apiCarsPost'][0])
-    {
-        return $this->apiCarsPostAsyncWithHttpInfo($create_car_command, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation apiCarsPostAsyncWithHttpInfo
-     *
-     * @param  \OpenAPI\Client\models\CreateCarCommand $create_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function apiCarsPostAsyncWithHttpInfo($create_car_command, string $contentType = self::contentTypes['apiCarsPost'][0])
-    {
-        $returnType = '';
-        $request = $this->apiCarsPostRequest($create_car_command, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'apiCarsPost'
-     *
-     * @param  \OpenAPI\Client\models\CreateCarCommand $create_car_command (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function apiCarsPostRequest($create_car_command, string $contentType = self::contentTypes['apiCarsPost'][0])
-    {
-
-        // verify the required parameter 'create_car_command' is set
-        if ($create_car_command === null || (is_array($create_car_command) && count($create_car_command) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $create_car_command when calling apiCarsPost'
-            );
-        }
-
-
-        $resourcePath = '/api/cars';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($create_car_command)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_car_command));
-            } else {
-                $httpBody = $create_car_command;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
