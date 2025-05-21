@@ -7,7 +7,7 @@
       "php": {
         "generatorName": "php",
         "inputSpec": "api.json",
-        "output": "include/http",
+        "output": "api-client",
         "additionalProperties": {
           "supportsES6": true,
           "withSeparateModelsAndApi": true,

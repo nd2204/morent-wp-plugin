@@ -4,6 +4,14 @@
     "title": "Morent.WebApi | v1",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://localhost:7083"
+    },
+    {
+      "url": "http://localhost:5154"
+    }
+  ],
   "paths": {
     "/api/users/{userId}/profile-image": {
       "get": {
@@ -400,6 +408,75 @@
         }
       }
     },
+    "/api/users/me/reviews/{reviewId}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReviewRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReviewRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users/me/reviews": {
       "get": {
         "tags": [
@@ -478,69 +555,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReviewDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/users/me/reviews/{reviewId}": {
-      "put": {
-        "tags": [
-          "User"
-        ],
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateReviewRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateReviewRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateReviewRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string",
-                  "format": "uuid"
                 }
               }
             }
@@ -685,14 +699,78 @@
         }
       }
     },
-    "/api/cars/{id}": {
+    "/api/cars/near": {
       "get": {
         "tags": [
           "Car"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "Longitude",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "Latitude",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "MaxDistanceKm",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarLocationDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarLocationDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarLocationDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cars/{carId}": {
+      "get": {
+        "tags": [
+          "Car"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
             "in": "path",
             "required": true,
             "schema": {
@@ -725,7 +803,7 @@
         }
       }
     },
-    "/api/cars/{id}/reviews": {
+    "/api/cars/{carId}/reviews": {
       "get": {
         "tags": [
           "Car"
@@ -733,14 +811,6 @@
         "parameters": [
           {
             "name": "carId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -851,7 +921,7 @@
         }
       }
     },
-    "/api/admin/car": {
+    "/api/admin/cars": {
       "post": {
         "tags": [
           "Admin"
@@ -883,7 +953,7 @@
         }
       }
     },
-    "/api/admin/car/{id}": {
+    "/api/admin/cars/{id}": {
       "put": {
         "tags": [
           "Admin"
@@ -947,7 +1017,7 @@
         }
       }
     },
-    "/api/admin/car/{carId}/images": {
+    "/api/admin/cars/{carId}/images": {
       "post": {
         "tags": [
           "Admin"
@@ -973,8 +1043,7 @@
                     "$ref": "#/components/schemas/IFormFile"
                   },
                   "ImageUrl": {
-                    "type": "string",
-                    "format": "uuid"
+                    "type": "string"
                   },
                   "SetAsPrimary": {
                     "type": "boolean"
@@ -1069,7 +1138,7 @@
         }
       }
     },
-    "/api/admin/car/{carId}/images/{imageId}": {
+    "/api/admin/cars/{carId}/images/{imageId}": {
       "post": {
         "tags": [
           "Admin"
@@ -1161,7 +1230,7 @@
         }
       }
     },
-    "/api/admin/car/{carId}/images/{imageId}/set-primary": {
+    "/api/admin/cars/{carId}/images/{imageId}/set-primary": {
       "put": {
         "tags": [
           "Admin"
@@ -1270,7 +1339,7 @@
         }
       }
     },
-    "/api/admin/car/{carId}/images/reorder": {
+    "/api/admin/cars/{carId}/images/reorder": {
       "put": {
         "tags": [
           "Admin"
@@ -1382,6 +1451,62 @@
         }
       }
     },
+    "/api/admin/rentals": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/login": {
       "post": {
         "tags": [
@@ -1413,17 +1538,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                  "$ref": "#/components/schemas/AuthResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                  "$ref": "#/components/schemas/AuthResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                  "$ref": "#/components/schemas/AuthResponse"
                 }
               }
             }
@@ -1668,9 +1793,46 @@
         "tags": [
           "Payment"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -1730,7 +1892,7 @@
             }
           },
           "location": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           },
           "id": {
             "type": "string",
@@ -1863,20 +2025,35 @@
       },
       "CarLocationDto": {
         "required": [
-          "city",
-          "address",
-          "country"
+          "carId",
+          "title",
+          "imageUrl",
+          "carModel",
+          "longitude",
+          "latitude"
         ],
         "type": "object",
         "properties": {
-          "city": {
+          "carId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
             "type": "string"
           },
-          "address": {
+          "imageUrl": {
             "type": "string"
           },
-          "country": {
-            "type": "string"
+          "carModel": {
+            "$ref": "#/components/schemas/CarModelDto"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -1944,7 +2121,7 @@
             "type": "string"
           },
           "location": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           },
           "images": {
             "type": "array",
@@ -1977,10 +2154,10 @@
             "format": "date-time"
           },
           "pickupLocation": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           },
           "dropoffLocation": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           }
         }
       },
@@ -2009,6 +2186,35 @@
           }
         }
       },
+      "LocationDto": {
+        "required": [
+          "longitude",
+          "latitude"
+        ],
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
       "LoginRequest": {
         "required": [
           "loginId",
@@ -2026,12 +2232,16 @@
       },
       "PaymentMethodDto": {
         "required": [
+          "id",
           "name",
           "logoUrl",
           "feePercent"
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
@@ -2043,6 +2253,67 @@
             "format": "double"
           }
         }
+      },
+      "PaymentRequest": {
+        "required": [
+          "rentalId",
+          "method",
+          "paymentProviderId"
+        ],
+        "type": "object",
+        "properties": {
+          "rentalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "method": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "returnUrl": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "paymentProviderId": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentResponse": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PaymentStatus"
+          },
+          "paymentUrl": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "providerData": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PaymentStatus": {
+        "type": "integer"
       },
       "ProblemDetails": {
         "type": "object",
@@ -2142,10 +2413,10 @@
             "format": "date-time"
           },
           "pickupLocation": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           },
           "dropoffLocation": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           },
           "totalCost": {
             "type": "number",
@@ -2225,7 +2496,7 @@
             "type": "boolean"
           },
           "location": {
-            "$ref": "#/components/schemas/CarLocationDto"
+            "$ref": "#/components/schemas/LocationDto"
           },
           "imagesToAdd": {
             "type": "array",
