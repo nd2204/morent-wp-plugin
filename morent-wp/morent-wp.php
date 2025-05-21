@@ -4,6 +4,7 @@ Plugin Name: morent-wp
 Description: Morent admin client for wordpress
 Version: 1.0
 Author: nd2204
+Requires PHP: 8.4
 */
 if (!defined('ABSPATH')) exit;
 
@@ -23,10 +24,17 @@ function mr_deactivate_plugin() {
     // Tùy chọn: xóa bảng khi hủy kích hoạt.
 }
 
+function mr_enqueue_style() {
+    wp_enqueue_style(
+        'mr-style',
+        MR_PLUGIN_URL . 'assets/css/style.css',
+        array(),
+        '1.0.0'
+    );
+}
+
 // Load style
-add_action('admin_enqueue_scripts', function () {
-    wp_enqueue_style('mr-style', MR_PLUGIN_URL . 'assets/css/style.css');
-});
+add_action('admin_enqueue_scripts', 'mr_enqueue_style');
 
 // Load các file chức năng
 require_once MR_PLUGIN_DIR . 'includes/functions.php';

@@ -4,13 +4,18 @@ volumes:
 services:
   nginx:
     image: nginx:stable-alpine
+    depends_on:
+      - php
     ports:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./wordpress:/var/www/html:delegate
+      - ./wordpress:/var/www/html:cached
+      - ./morent-wp:/var/www/html/wp-content/plugins/morent-wp
+      - ./wp-config.php:/var/www/html/wp-config.php
   mysql:
     image: mysql:latest
+    env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_ADMIN_PASSWORD}
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
@@ -21,10 +26,12 @@ services:
     volumes:
       - db_data:/var/lib/mysql
   php:
+    depends_on:
+      - mysql
     build:
       context: .
       dockerfile: php.Dockerfile
     volumes:
-      - ./wordpress:/var/www/html
+      - ./wordpress:/var/www/html:cached
       - ./morent-wp:/var/www/html/wp-content/plugins/morent-wp
       - ./wp-config.php:/var/www/html/wp-config.php
