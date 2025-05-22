@@ -876,3 +876,168 @@ td {
   margin-bottom: 5px;
   font-size: 1rem;
 }
+
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  background-color: #fafafa;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: white;
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+.forgot-password a {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password a:hover {
+  color: #007bff;
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.signin-btn:hover {
+  background-color: #333;
+}
+
+.divider {
+  text-align: center;
+  margin: 24px 0;
+  color: #666;
+  font-size: 14px;
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #e5e5e5;
+  z-index: 1;
+}
+
+.divider span {
+  background-color: white;
+  padding: 0 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.social-login {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.social-btn {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.social-btn:hover {
+  border-color: #007bff;
+  transform: translateY(-2px);
+}
+
+.social-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 24px;
+  }
+
+  .logo h1 {
+    font-size: 28px;
+  }
+}
