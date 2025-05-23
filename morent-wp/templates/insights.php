@@ -297,43 +297,6 @@ $monthlyDataJSON = json_encode($monthlyData);
             }
         });
 
-        // Car Categories Chart
-        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-        const categoryChart = new Chart(categoryCtx, {
-            type: 'pie',
-            data: {
-                labels: Object.keys(categoryData),
-                datasets: [{
-                    data: Object.values(categoryData),
-                    backgroundColor: [
-                        'rgba(25, 51, 153, 0.8)',
-                        'rgba(65, 105, 225, 0.8)',
-                        'rgba(100, 149, 237, 0.8)',
-                        'rgba(135, 206, 250, 0.8)',
-                        'rgba(173, 216, 230, 0.8)'
-                    ],
-                    borderColor: 'white',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `${context.label}: ${context.raw}%`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
         // Car Pricing Chart
         const pricingCtx = document.getElementById('pricingChart').getContext('2d');
         const pricingChart = new Chart(pricingCtx, {

@@ -59,7 +59,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'description' => 'string',
         'reviews' => '\OpenAPI\Client\models\ReviewDto[]',
-        'location' => '\OpenAPI\Client\models\LocationDto',
         'id' => 'string',
         'title' => 'string',
         'car_model' => '\OpenAPI\Client\models\CarModelDto',
@@ -69,7 +68,8 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'images' => '\OpenAPI\Client\models\CarImageDto[]',
         'is_available' => 'bool',
         'average_rating' => 'float',
-        'reviews_count' => 'int'
+        'reviews_count' => 'int',
+        'location' => '\OpenAPI\Client\models\LocationDto'
     ];
 
     /**
@@ -82,7 +82,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'description' => null,
         'reviews' => null,
-        'location' => null,
         'id' => 'uuid',
         'title' => null,
         'car_model' => null,
@@ -92,7 +91,8 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'images' => null,
         'is_available' => null,
         'average_rating' => 'double',
-        'reviews_count' => 'int32'
+        'reviews_count' => 'int32',
+        'location' => null
     ];
 
     /**
@@ -103,7 +103,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'description' => false,
         'reviews' => false,
-        'location' => false,
         'id' => false,
         'title' => false,
         'car_model' => false,
@@ -113,7 +112,8 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'images' => false,
         'is_available' => false,
         'average_rating' => false,
-        'reviews_count' => false
+        'reviews_count' => false,
+        'location' => false
     ];
 
     /**
@@ -204,7 +204,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'description' => 'description',
         'reviews' => 'reviews',
-        'location' => 'location',
         'id' => 'id',
         'title' => 'title',
         'car_model' => 'carModel',
@@ -214,7 +213,8 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'images' => 'images',
         'is_available' => 'isAvailable',
         'average_rating' => 'averageRating',
-        'reviews_count' => 'reviewsCount'
+        'reviews_count' => 'reviewsCount',
+        'location' => 'location'
     ];
 
     /**
@@ -225,7 +225,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'description' => 'setDescription',
         'reviews' => 'setReviews',
-        'location' => 'setLocation',
         'id' => 'setId',
         'title' => 'setTitle',
         'car_model' => 'setCarModel',
@@ -235,7 +234,8 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'images' => 'setImages',
         'is_available' => 'setIsAvailable',
         'average_rating' => 'setAverageRating',
-        'reviews_count' => 'setReviewsCount'
+        'reviews_count' => 'setReviewsCount',
+        'location' => 'setLocation'
     ];
 
     /**
@@ -246,7 +246,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'description' => 'getDescription',
         'reviews' => 'getReviews',
-        'location' => 'getLocation',
         'id' => 'getId',
         'title' => 'getTitle',
         'car_model' => 'getCarModel',
@@ -256,7 +255,8 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'images' => 'getImages',
         'is_available' => 'getIsAvailable',
         'average_rating' => 'getAverageRating',
-        'reviews_count' => 'getReviewsCount'
+        'reviews_count' => 'getReviewsCount',
+        'location' => 'getLocation'
     ];
 
     /**
@@ -318,7 +318,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('reviews', $data ?? [], null);
-        $this->setIfExists('location', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('car_model', $data ?? [], null);
@@ -329,6 +328,7 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('is_available', $data ?? [], null);
         $this->setIfExists('average_rating', $data ?? [], null);
         $this->setIfExists('reviews_count', $data ?? [], null);
+        $this->setIfExists('location', $data ?? [], null);
     }
 
     /**
@@ -364,9 +364,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['reviews'] === null) {
             $invalidProperties[] = "'reviews' can't be null";
         }
-        if ($this->container['location'] === null) {
-            $invalidProperties[] = "'location' can't be null";
-        }
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
@@ -396,6 +393,9 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['reviews_count'] === null) {
             $invalidProperties[] = "'reviews_count' can't be null";
+        }
+        if ($this->container['location'] === null) {
+            $invalidProperties[] = "'location' can't be null";
         }
         return $invalidProperties;
     }
@@ -462,33 +462,6 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable reviews cannot be null');
         }
         $this->container['reviews'] = $reviews;
-
-        return $this;
-    }
-
-    /**
-     * Gets location
-     *
-     * @return \OpenAPI\Client\models\LocationDto
-     */
-    public function getLocation()
-    {
-        return $this->container['location'];
-    }
-
-    /**
-     * Sets location
-     *
-     * @param \OpenAPI\Client\models\LocationDto $location location
-     *
-     * @return self
-     */
-    public function setLocation($location)
-    {
-        if (is_null($location)) {
-            throw new \InvalidArgumentException('non-nullable location cannot be null');
-        }
-        $this->container['location'] = $location;
 
         return $this;
     }
@@ -759,6 +732,33 @@ class CarDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable reviews_count cannot be null');
         }
         $this->container['reviews_count'] = $reviews_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets location
+     *
+     * @return \OpenAPI\Client\models\LocationDto
+     */
+    public function getLocation()
+    {
+        return $this->container['location'];
+    }
+
+    /**
+     * Sets location
+     *
+     * @param \OpenAPI\Client\models\LocationDto $location location
+     *
+     * @return self
+     */
+    public function setLocation($location)
+    {
+        if (is_null($location)) {
+            throw new \InvalidArgumentException('non-nullable location cannot be null');
+        }
+        $this->container['location'] = $location;
 
         return $this;
     }

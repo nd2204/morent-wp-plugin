@@ -12,6 +12,7 @@ All URIs are relative to https://localhost:7083, except if the operation defines
 | [**apiAdminCarsIdPut()**](AdminApi.md#apiAdminCarsIdPut) | **PUT** /api/admin/cars/{id} |  |
 | [**apiAdminCarsPost()**](AdminApi.md#apiAdminCarsPost) | **POST** /api/admin/cars |  |
 | [**apiAdminRentalsGet()**](AdminApi.md#apiAdminRentalsGet) | **GET** /api/admin/rentals |  |
+| [**apiAdminUsersGet()**](AdminApi.md#apiAdminUsersGet) | **GET** /api/admin/users |  |
 
 
 ## `apiAdminCarsCarIdImagesImageIdPost()`
@@ -404,7 +405,7 @@ No authorization required
 ## `apiAdminRentalsGet()`
 
 ```php
-apiAdminRentalsGet($page, $page_size): \OpenAPI\Client\models\RentalDto[]
+apiAdminRentalsGet($page, $page_size): \OpenAPI\Client\models\RentalDetailDto[]
 ```
 
 
@@ -442,7 +443,63 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\models\RentalDto[]**](../Model/RentalDto.md)
+[**\OpenAPI\Client\models\RentalDetailDto[]**](../Model/RentalDetailDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `apiAdminUsersGet()`
+
+```php
+apiAdminUsersGet($page, $page_size): \OpenAPI\Client\models\UserDto[]
+```
+
+
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new OpenAPI\Client\Api\AdminApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$page = 56; // int
+$page_size = 56; // int
+
+try {
+    $result = $apiInstance->apiAdminUsersGet($page, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdminApi->apiAdminUsersGet: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **page** | **int**|  | [optional] |
+| **page_size** | **int**|  | [optional] |
+
+### Return type
+
+[**\OpenAPI\Client\models\UserDto[]**](../Model/UserDto.md)
 
 ### Authorization
 

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**model_id** | **string** |  |
 **brand** | **string** |  |
 **model** | **string** |  |
 **fuel_type** | **string** |  |

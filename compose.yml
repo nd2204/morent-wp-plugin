@@ -4,6 +4,7 @@ volumes:
 services:
   nginx:
     image: nginx:stable-alpine
+    container_name: wp-nginx
     depends_on:
       - php
     ports:
@@ -15,6 +16,7 @@ services:
       - ./wp-config.php:/var/www/html/wp-config.php
   mysql:
     image: mysql:latest
+    container_name: wp-mysql
     env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_ADMIN_PASSWORD}
@@ -26,6 +28,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
   php:
+    container_name: wp-php
     depends_on:
       - mysql
     build:

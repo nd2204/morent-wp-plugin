@@ -27,17 +27,24 @@ function mr_deactivate_plugin() {
     // Tùy chọn: xóa bảng khi hủy kích hoạt.
 }
 
+// Load style
+add_action('admin_enqueue_scripts', 'mr_enqueue_style');
+
 function mr_enqueue_style() {
+    wp_enqueue_style(
+        'font-awesome',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
+        array(),
+        '6.5.0'
+    );
+
     wp_enqueue_style(
         'mr-style',
         MR_URL. 'assets/css/style.css',
-        array(),
+        array('font-awesome'),
         '1.0.0'
     );
 }
-
-// Load style
-add_action('admin_enqueue_scripts', 'mr_enqueue_style');
 
 // Include Composer autoloader if it exists
 if (file_exists(MR_API_CLIENT_DIR . 'vendor/autoload.php')) {
@@ -57,13 +64,58 @@ require_once MR_INCLUDE_DIR . 'functions.php';
 
 // Thêm menu admin
 function mr_register_admin_menu() {
+
     $menu_slug = "morent_menu";
     $dashboard_callback = get_page_callback("dashboard");
-    add_menu_page('Morent - Dashboard', 'Morent', 'manage_options', $menu_slug, $dashboard_callback, 'dashicons-car');
-    add_submenu_page($menu_slug, 'Morent - Dashboard', 'Dashboard', 'manage_options', $menu_slug, $dashboard_callback);
-    add_submenu_page($menu_slug, 'Morent - Manage Cars', 'Manage Cars', 'manage_options', 'morent_car_rent', get_page_callback("CarRent"));
+
+    add_menu_page('Morent - Dashboard',
+        'Morent',
+        'manage_options',
+        $menu_slug,
+        $dashboard_callback,
+        'dashicons-car'
+    );
+
+    add_submenu_page($menu_slug,
+        'Morent - Dashboard',
+        'Dashboard',
+        'manage_options',
+        $menu_slug,
+        $dashboard_callback
+    );
+
+    add_submenu_page(
+        $menu_slug,
+        'Morent - Manage Cars',
+        'Manage Cars',
+        'manage_options',
+        'morent_car_rent',
+        get_page_callback("cars")
+    );
+
     add_submenu_page($menu_slug, 'Morent - Insights', 'Insights', 'manage_options', 'morent_insights', get_page_callback('insights'));
     add_submenu_page($menu_slug, 'Morent - Reimburse', 'Reimburse', 'manage_options', 'morent_reimburse', get_page_callback('reimburse'));
+    add_submenu_page($menu_slug, 'Morent - Users', 'Manage Users', 'manage_options', 'morent_users', get_page_callback('users'));
+
+    add_submenu_page(
+        null,
+        'Morent - Login',
+        '',
+        'manage_options',
+        'morent_login',
+        get_template_page_callback("login-form"),
+    );
+
+    if (mr_is_logged_in()) {
+        add_submenu_page(
+            $menu_slug,
+            'Morent - Logout',
+            'Logout',
+            'manage_options',
+            'morent_logout',
+            get_page_callback('logout')
+        );
+    }
 }
 
 add_action('admin_menu', 'mr_register_admin_menu');

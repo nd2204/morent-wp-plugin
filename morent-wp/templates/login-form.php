@@ -3,9 +3,6 @@
 use OpenAPI\Client\models\LoginRequest;
 use OpenAPI\Client\models\AuthResponse;
 
-// Khởi tạo session nếu chưa có
-if (!session_id()) session_start();
-
 $client = new MorentApiClient();
 $authApi = $client->AuthApi();
 
@@ -23,8 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mr_login'])) {
 
     try {
         $result = $authApi->apiAuthLoginPost($request);
-        print_r($result);
 
+        // Khởi tạo session nếu chưa có
+        if (!session_id()) session_start();
         // Đăng nhập thành công, lưu session và chuyển đến dashboard
         $_SESSION['Morent_user'] = $result->getUser()->getUserId();
         echo "<script>location.href='" . admin_url('admin.php?page=morent_menu') . "'</script>";
@@ -44,13 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mr_login'])) {
     </div>
 
     <form method="POST">
-        <div class="form-group">
+        <div class="form-group form-group-login">
             <label for="username">Username or email address</label>
             <input type="text" id="username" name="username" placeholder="Your username or email" required>
             <div class="error-message" id="usernameError"></div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-group-login">
             <label for="password">Password</label>
             <div class="input-wrapper">
                 <input type="password" id="password" name="password" placeholder="Password" required>

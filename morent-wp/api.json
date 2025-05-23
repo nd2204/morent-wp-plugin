@@ -629,10 +629,27 @@
             }
           },
           {
-            "name": "carFilter.Location",
+            "name": "carFilter.NearLat",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "carFilter.NearLon",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "carFilter.MaxDistanceKm",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -691,6 +708,62 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/CarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cars/models": {
+      "get": {
+        "tags": [
+          "Car"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarModelDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarModelDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarModelDto"
                   }
                 }
               }
@@ -1482,7 +1555,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RentalDto"
+                    "$ref": "#/components/schemas/RentalDetailDto"
                   }
                 }
               },
@@ -1490,7 +1563,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RentalDto"
+                    "$ref": "#/components/schemas/RentalDetailDto"
                   }
                 }
               },
@@ -1498,7 +1571,63 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RentalDto"
+                    "$ref": "#/components/schemas/RentalDetailDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
                   }
                 }
               }
@@ -1508,6 +1637,95 @@
       }
     },
     "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/admin/login": {
       "post": {
         "tags": [
           "Auth"
@@ -1868,7 +2086,6 @@
         "required": [
           "description",
           "reviews",
-          "location",
           "id",
           "title",
           "carModel",
@@ -1878,7 +2095,8 @@
           "images",
           "isAvailable",
           "averageRating",
-          "reviewsCount"
+          "reviewsCount",
+          "location"
         ],
         "type": "object",
         "properties": {
@@ -1890,9 +2108,6 @@
             "items": {
               "$ref": "#/components/schemas/ReviewDto"
             }
-          },
-          "location": {
-            "$ref": "#/components/schemas/LocationDto"
           },
           "id": {
             "type": "string",
@@ -1930,6 +2145,9 @@
           "reviewsCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationDto"
           }
         }
       },
@@ -1944,7 +2162,8 @@
           "images",
           "isAvailable",
           "averageRating",
-          "reviewsCount"
+          "reviewsCount",
+          "location"
         ],
         "type": "object",
         "properties": {
@@ -1984,6 +2203,9 @@
           "reviewsCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationDto"
           }
         }
       },
@@ -2059,6 +2281,7 @@
       },
       "CarModelDto": {
         "required": [
+          "modelId",
           "brand",
           "model",
           "fuelType",
@@ -2070,6 +2293,10 @@
         ],
         "type": "object",
         "properties": {
+          "modelId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "brand": {
             "type": "string"
           },
@@ -2373,6 +2600,62 @@
           },
           "password": {
             "type": "string"
+          }
+        }
+      },
+      "RentalDetailDto": {
+        "required": [
+          "id",
+          "user",
+          "car",
+          "pickupDate",
+          "dropoffDate",
+          "pickupLocation",
+          "dropoffLocation",
+          "totalCost",
+          "currency",
+          "status",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserDto"
+          },
+          "car": {
+            "$ref": "#/components/schemas/CarDto"
+          },
+          "pickupDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dropoffDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pickupLocation": {
+            "$ref": "#/components/schemas/LocationDto"
+          },
+          "dropoffLocation": {
+            "$ref": "#/components/schemas/LocationDto"
+          },
+          "totalCost": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },

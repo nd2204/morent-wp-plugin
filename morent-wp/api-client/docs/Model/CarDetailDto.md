@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **string** |  |
 **reviews** | [**\OpenAPI\Client\models\ReviewDto[]**](ReviewDto.md) |  |
-**location** | [**\OpenAPI\Client\models\LocationDto**](LocationDto.md) |  |
 **id** | **string** |  |
 **title** | **string** |  |
 **car_model** | [**\OpenAPI\Client\models\CarModelDto**](CarModelDto.md) |  |
@@ -17,5 +16,6 @@ Name | Type | Description | Notes
 **is_available** | **bool** |  |
 **average_rating** | **float** |  |
 **reviews_count** | **int** |  |
+**location** | [**\OpenAPI\Client\models\LocationDto**](LocationDto.md) |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

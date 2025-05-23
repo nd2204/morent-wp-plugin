@@ -8,6 +8,7 @@ All URIs are relative to https://localhost:7083, except if the operation defines
 | [**apiCarsCarIdImagesGet()**](CarApi.md#apiCarsCarIdImagesGet) | **GET** /api/cars/{carId}/images |  |
 | [**apiCarsCarIdReviewsGet()**](CarApi.md#apiCarsCarIdReviewsGet) | **GET** /api/cars/{carId}/reviews |  |
 | [**apiCarsGet()**](CarApi.md#apiCarsGet) | **GET** /api/cars |  |
+| [**apiCarsModelsGet()**](CarApi.md#apiCarsModelsGet) | **GET** /api/cars/models |  |
 | [**apiCarsNearGet()**](CarApi.md#apiCarsNearGet) | **GET** /api/cars/near |  |
 
 
@@ -176,7 +177,7 @@ No authorization required
 ## `apiCarsGet()`
 
 ```php
-apiCarsGet($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_location, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size): \OpenAPI\Client\models\CarDto[]
+apiCarsGet($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_near_lat, $car_filter_near_lon, $car_filter_max_distance_km, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size): \OpenAPI\Client\models\CarDto[]
 ```
 
 
@@ -202,14 +203,16 @@ $car_filter_gearbox = 'car_filter_gearbox_example'; // string
 $car_filter_min_price = 3.4; // float
 $car_filter_max_price = 3.4; // float
 $car_filter_rating = 56; // int
-$car_filter_location = 'car_filter_location_example'; // string
+$car_filter_near_lat = 3.4; // float
+$car_filter_near_lon = 3.4; // float
+$car_filter_max_distance_km = 56; // int
 $car_filter_search = 'car_filter_search_example'; // string
 $car_filter_sort = 'car_filter_sort_example'; // string
 $paged_query_page = 56; // int
 $paged_query_page_size = 56; // int
 
 try {
-    $result = $apiInstance->apiCarsGet($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_location, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size);
+    $result = $apiInstance->apiCarsGet($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_near_lat, $car_filter_near_lon, $car_filter_max_distance_km, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CarApi->apiCarsGet: ', $e->getMessage(), PHP_EOL;
@@ -228,7 +231,9 @@ try {
 | **car_filter_min_price** | **float**|  | [optional] |
 | **car_filter_max_price** | **float**|  | [optional] |
 | **car_filter_rating** | **int**|  | [optional] |
-| **car_filter_location** | **string**|  | [optional] |
+| **car_filter_near_lat** | **float**|  | [optional] |
+| **car_filter_near_lon** | **float**|  | [optional] |
+| **car_filter_max_distance_km** | **int**|  | [optional] |
 | **car_filter_search** | **string**|  | [optional] |
 | **car_filter_sort** | **string**|  | [optional] |
 | **paged_query_page** | **int**|  | [optional] |
@@ -237,6 +242,62 @@ try {
 ### Return type
 
 [**\OpenAPI\Client\models\CarDto[]**](../Model/CarDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `apiCarsModelsGet()`
+
+```php
+apiCarsModelsGet($page, $page_size): \OpenAPI\Client\models\CarModelDto[]
+```
+
+
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new OpenAPI\Client\Api\CarApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$page = 56; // int
+$page_size = 56; // int
+
+try {
+    $result = $apiInstance->apiCarsModelsGet($page, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CarApi->apiCarsModelsGet: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **page** | **int**|  | [optional] |
+| **page_size** | **int**|  | [optional] |
+
+### Return type
+
+[**\OpenAPI\Client\models\CarModelDto[]**](../Model/CarModelDto.md)
 
 ### Authorization
 

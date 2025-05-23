@@ -57,6 +57,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'model_id' => 'string',
         'brand' => 'string',
         'model' => 'string',
         'fuel_type' => 'string',
@@ -75,6 +76,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'model_id' => 'uuid',
         'brand' => null,
         'model' => null,
         'fuel_type' => null,
@@ -91,6 +93,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'model_id' => false,
         'brand' => false,
         'model' => false,
         'fuel_type' => false,
@@ -187,6 +190,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'model_id' => 'modelId',
         'brand' => 'brand',
         'model' => 'model',
         'fuel_type' => 'fuelType',
@@ -203,6 +207,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'model_id' => 'setModelId',
         'brand' => 'setBrand',
         'model' => 'setModel',
         'fuel_type' => 'setFuelType',
@@ -219,6 +224,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'model_id' => 'getModelId',
         'brand' => 'getBrand',
         'model' => 'getModel',
         'fuel_type' => 'getFuelType',
@@ -286,6 +292,7 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('model_id', $data ?? [], null);
         $this->setIfExists('brand', $data ?? [], null);
         $this->setIfExists('model', $data ?? [], null);
         $this->setIfExists('fuel_type', $data ?? [], null);
@@ -323,6 +330,9 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['model_id'] === null) {
+            $invalidProperties[] = "'model_id' can't be null";
+        }
         if ($this->container['brand'] === null) {
             $invalidProperties[] = "'brand' can't be null";
         }
@@ -361,6 +371,33 @@ class CarModelDto implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets model_id
+     *
+     * @return string
+     */
+    public function getModelId()
+    {
+        return $this->container['model_id'];
+    }
+
+    /**
+     * Sets model_id
+     *
+     * @param string $model_id model_id
+     *
+     * @return self
+     */
+    public function setModelId($model_id)
+    {
+        if (is_null($model_id)) {
+            throw new \InvalidArgumentException('non-nullable model_id cannot be null');
+        }
+        $this->container['model_id'] = $model_id;
+
+        return $this;
+    }
 
     /**
      * Gets brand

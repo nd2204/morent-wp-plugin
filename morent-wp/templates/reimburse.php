@@ -1,61 +1,19 @@
 <?php
-// Database connection would normally go here
-// For this example, we'll use hard-coded data
+$adminApi = new MorentApiClient()->AdminApi();
 
-// Sample reimbursement data
-$reimbursements = [
-    [
-        'id' => 1,
-        'car' => 'Nissan GT-R',
-        'car_img' => 'nissan-gtr.jpg',
-        'customer' => 'John Smith',
-        'amount' => 35.00,
-        'date' => 'Jul 15, 2022',
-        'reason' => 'Unexpected fuel charge',
-        'status' => 'Approved'
-    ],
-    [
-        'id' => 2,
-        'car' => 'Porsche 911',
-        'car_img' => 'porsche-911.jpg',
-        'customer' => 'Emma Johnson',
-        'amount' => 120.00,
-        'date' => 'Jul 14, 2022',
-        'reason' => 'Maintenance during rental period',
-        'status' => 'Pending'
-    ],
-    [
-        'id' => 3,
-        'car' => 'Range Rover Sport',
-        'car_img' => 'range-rover.jpg',
-        'customer' => 'Michael Brown',
-        'amount' => 68.50,
-        'date' => 'Jul 12, 2022',
-        'reason' => 'Unauthorized extension of rental',
-        'status' => 'Rejected'
-    ],
-    [
-        'id' => 4,
-        'car' => 'Ferrari F8',
-        'car_img' => 'ferrari-f8.jpg',
-        'customer' => 'Sophia Davis',
-        'amount' => 95.20,
-        'date' => 'Jul 10, 2022',
-        'reason' => 'Incorrect billing amount',
-        'status' => 'Approved'
-    ],
-    [
-        'id' => 5,
-        'car' => 'Koenigsegg',
-        'car_img' => 'koenigsegg.jpg',
-        'customer' => 'William Taylor',
-        'amount' => 55.75,
-        'date' => 'Jul 08, 2022',
-        'reason' => 'Additional cleaning charges dispute',
-        'status' => 'Pending'
-    ],
-];
-// Sample car options for dropdown
+$reimbursements = [];
+
+try {
+    $page = 1;
+    $page_size = 20;
+    $reimbursements = $adminApi->apiAdminRentalsGet($page, $page_size);
+
+
+    print_r($reimbursements[0]);
+} catch (Exception $e) {
+    echo 'Rentals Error: ', $e->getMessage(), PHP_EOL;
+}
+
 $carOptions = [
     "Toyota Camry",
     "Honda Accord",
@@ -65,17 +23,20 @@ $carOptions = [
 ];
 
 // Count reimbursements by status
-$pending_count = 0;
-$approved_count = 0;
-$rejected_count = 0;
+$active_count = 0;
+$completed_count = 0;
+$cancelled_count = 0;
+$reserved_count = 0;
 
 foreach ($reimbursements as $reimbursement) {
-    if ($reimbursement['status'] === 'Pending') {
-        $pending_count++;
-    } elseif ($reimbursement['status'] === 'Approved') {
-        $approved_count++;
-    } elseif ($reimbursement['status'] === 'Rejected') {
-        $rejected_count++;
+    if ($reimbursement['status'] === 'Active') {
+        $active_count++;
+    } elseif ($reimbursement['status'] === 'Completed') {
+        $completed_count++;
+    } elseif ($reimbursement['status'] === 'Cancelled') {
+        $cancelled_count++;
+    } elseif ($reimbursement['status'] === 'Reserved') {
+        $reserved_count++;
     }
 }
 
@@ -84,7 +45,7 @@ $modal = '';
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     $id = isset($_GET['id']) ? $_GET['id'] : null;
-    
+
     if ($action === 'new') {
         $modal = 'new-reimbursement';
     } elseif ($action === 'view' && $id !== null) {
@@ -104,12 +65,14 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reimbursement Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -128,26 +91,80 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
             </div>
         </header>
 
-        <!-- Search Bar -->
-        <div class="search-filter">
-            <div class="search-bar">
-                <input type="text" placeholder="Search by customer or reason...">
+        <!-- Stats Cards -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon icon-active">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3><?php echo $active_count; ?></h3>
+                    <p>Active Reimbursements</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon icon-completed">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3><?php echo $completed_count; ?></h3>
+                    <p>Completed Reimbursements</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon icon-reserved">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div class="stat-info">
+                    <h3><?php echo $reserved_count; ?></h3>
+                    <p>Reserved Reimbursements</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon icon-cancelled">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3><?php echo $cancelled_count; ?></h3>
+                    <p>Cancelled Reimbursements</p>
+                </div>
             </div>
         </div>
 
+        <!-- Search Bar -->
+        <div class="searchbar">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="searchbar__icon">
+                <g>
+                    <path
+                        d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                </g>
+            </svg>
+
+            <input
+                id="query"
+                class="searchbar__input"
+                type="search"
+                placeholder="Search..."
+                name="searchbar" />
+        </div>
+
+
         <!-- Tabs -->
-        <div class="tabs">
+        <div class="tabs" style="margin-top: 20px;">
             <div class="tab <?php echo $active_tab === 'all' ? 'active' : ''; ?>">
-                <a href="admin.php?page=Morent_search&tab=all" style="text-decoration: none; color: inherit;">All Requests</a>
+                <a href="admin.php?page=morent_reimburse&tab=all" style="text-decoration: none; color: inherit;">All Requests</a>
             </div>
-            <div class="tab <?php echo $active_tab === 'pending' ? 'active' : ''; ?>">
-                <a href="admin.php?page=Morent_search&tab=pending" style="text-decoration: none; color: inherit;">Pending</a>
+            <div class="tab <?php echo $active_tab === 'active' ? 'active' : ''; ?>">
+                <a href="admin.php?page=morent_reimburse&tab=active" style="text-decoration: none; color: inherit;">Active</a>
             </div>
-            <div class="tab <?php echo $active_tab === 'approved' ? 'active' : ''; ?>">
-                <a href="admin.php?page=Morent_search&tab=approved" style="text-decoration: none; color: inherit;">Approved</a>
+            <div class="tab <?php echo $active_tab === 'completed' ? 'active' : ''; ?>">
+                <a href="admin.php?page=morent_reimburse&tab=completed" style="text-decoration: none; color: inherit;">Completed</a>
             </div>
-            <div class="tab <?php echo $active_tab === 'rejected' ? 'active' : ''; ?>">
-                <a href="admin.php?page=Morent_search&tab=rejected" style="text-decoration: none; color: inherit;">Rejected</a>
+            <div class="tab <?php echo $active_tab === 'cancelled' ? 'active' : ''; ?>">
+                <a href="admin.php?page=morent_reimburse&tab=cancelled" style="text-decoration: none; color: inherit;">Cancelled</a>
             </div>
         </div>
 
@@ -160,83 +177,78 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                     <th>Customer</th>
                     <th>Amount</th>
                     <th>Date</th>
-                    <th>Reason</th>
+                    <th>Location</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($reimbursements as $reimbursement): 
+                <?php foreach ($reimbursements as $reimbursement):
                     // Skip if we're filtering by tab
                     if (
-                        ($active_tab === 'pending' && $reimbursement['status'] !== 'Pending') ||
-                        ($active_tab === 'approved' && $reimbursement['status'] !== 'Approved') ||
-                        ($active_tab === 'rejected' && $reimbursement['status'] !== 'Rejected')
+                        ($active_tab === 'active' && $reimbursement['status'] !== 'Active') ||
+                        ($active_tab === 'completed' && $reimbursement['status'] !== 'Completed') ||
+                        ($active_tab === 'cancelled' && $reimbursement['status'] !== 'Cancelled')
                     ) {
                         continue;
                     }
+                    $pickupDate = new DateTime($reimbursement['pickupDate']);
+                    $dropoffDate = new DateTime($reimbursement['dropoffDate']);
                 ?>
-                <tr>
-                    <td>#<?php echo $reimbursement['id']; ?></td>
-                    <td>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="<?php echo $reimbursement['car_img']; ?>" alt="<?php echo $reimbursement['car']; ?>" class="car-image">
-                            <span class="car-name"><?php echo $reimbursement['car']; ?></span>
-                        </div>
-                    </td>
-                    <td><?php echo $reimbursement['customer']; ?></td>
-                    <td>$<?php echo number_format($reimbursement['amount'], 2); ?></td>
-                    <td><?php echo $reimbursement['date']; ?></td>
-                    <td><?php echo $reimbursement['reason']; ?></td>
-                    <td>
-                        <span class="status status-<?php echo strtolower($reimbursement['status']); ?>">
-                            <?php echo $reimbursement['status']; ?>
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline" style="padding: 6px 12px; font-size: 14px;"  id="openViewBtn">View</button>
-                        <?php if ($reimbursement['status'] === 'Pending'): ?>
-                        <button class="btn btn-success" style="padding: 6px 12px; font-size: 14px;">Approve</button>
-                        <button class="btn btn-danger" style="padding: 6px 12px; font-size: 14px;">Reject</button>
-                        <?php endif; ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>#<?php echo $reimbursement['id']; ?></td>
+                        <td>
+                            <div class="cell_flex">
+                                <img src="<?php echo $reimbursement->getCar()->getImages()[0]->getUrl(); ?>" alt="<?php echo $reimbursement['car']['title']; ?>" class="car-image">
+                                <span class="car-name"><?php echo $reimbursement['car']['title']; ?></span>
+                            </div>
+                        </td>
+                        <td><?php echo $reimbursement['user']['name']; ?></td>
+                        <td>$<?php echo number_format($reimbursement['total_cost'], 2); ?></td>
+                        <td>
+                            <div class="cell_flex">
+                                <div>
+                                    <p>Pickup Date:</p>
+                                    <time class="bold_text" datetime="<?= $pickupDate->format(DATE_ATOM) ?>">
+                                        <?= $pickupDate->format('d M Y, H:i') ?>
+                                    </time>
+                                </div>
+                                <div>
+                                    <p>Dropoff Date:</p>
+                                    <time class="bold_text" datetime="<?= $dropoffDate->format(DATE_ATOM) ?>">
+                                        <?= $dropoffDate->format('d M Y, H:i') ?>
+                                    </time>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell_flex">
+                                <div>
+                                    <p>Pick up location:</p>
+                                    <span class="bold_text">
+                                        <?php echo $reimbursement['pickupLocation']['address']; ?>, <?php echo $reimbursement['pickup_location']['city']; ?>
+                                    </span>
+                                </div>
+                                <div>
+                                    <p>Drop off location:</p>
+                                    <span class="bold_text">
+                                        <?php echo $reimbursement['dropoffLocation']['address']; ?>, <?php echo $reimbursement['dropoff_location']['city']; ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status status-<?php echo strtolower($reimbursement['status']); ?>">
+                                <?php echo $reimbursement['status']; ?>
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 14px;" id="openViewBtn">View</button>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <!-- Stats Cards -->
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-icon icon-pending">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-info">
-                    <h3><?php echo $pending_count; ?></h3>
-                    <p>Pending Reimbursements</p>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon icon-approved">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="stat-info">
-                    <h3><?php echo $approved_count; ?></h3>
-                    <p>Approved Reimbursements</p>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon icon-rejected">
-                    <i class="fas fa-times-circle"></i>
-                </div>
-                <div class="stat-info">
-                    <h3><?php echo $rejected_count; ?></h3>
-                    <p>Rejected Reimbursements</p>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Modal for New Reimbursement -->
@@ -247,7 +259,7 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                 <button class="close-btn" id="closeModalBtn">&times;</button>
             </div>
             <p class="modal-small-header">Fill in the details for the new reimbursement request.</p>
-            
+
             <form method="POST" action="">
                 <div class="form-group" style="margin-bottom: 20px;">
                     <label class="form-label" for="customer">Customer</label>
@@ -271,7 +283,7 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                     <label class="form-label" for="customer">Reason</label>
                     <input type="text" class="form-control" id="customer" name="customer" placeholder="Customer Name" required>
                 </div>
-                
+
                 <button type="submit" class="submit-btn" name="add_car">
                     Create Request
                 </button>
@@ -317,8 +329,8 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
             </div>
             <div class="detail-row">
                 <div>
-                    <label>Reason</label>
-                    <p id="viewReason" style="margin: 0; color: #333; background: #f9f9f9; padding: 10px; border-radius: 4px;"></p>
+                    <label>Location</label>
+                    <p id="viewLocation" style="margin: 0; color: #333; background: #f9f9f9; padding: 10px; border-radius: 4px;"></p>
                 </div>
             </div>
             <div class="modal-footer" style="margin-top: 20px; display: flex; justify-content: flex-end;">
@@ -375,20 +387,43 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                 document.getElementById('viewCustomer').textContent = row.children[2].textContent;
                 document.getElementById('viewAmount').textContent = row.children[3].textContent;
                 document.getElementById('viewDate').textContent = row.children[4].textContent;
-                document.getElementById('viewReason').textContent = row.children[5].textContent;
+                document.getElementById('viewLocation').textContent = row.children[5].textContent;
                 document.getElementById('viewStatus').textContent = row.children[6].textContent.trim();
                 document.getElementById('viewCarId').textContent = `ID: ${row.children[0].textContent}`;
                 document.getElementById('viewCarIdValue').textContent = row.children[0].textContent.replace('#', '');
                 const status = row.children[6].textContent.trim().toLowerCase();
                 const statusElement = document.getElementById('viewStatus');
-                statusElement.style.backgroundColor = status === 'approved' ? '#d4edda' : status === 'pending' ? '#fff3cd' : '#f8d7da';
-                statusElement.style.color = status === 'approved' ? '#155724' : status === 'pending' ? '#856404' : '#721c24';
-                statusElement.textContent = row.children[6].textContent.trim();
+                statusElement.className = `status status-${status}`;
                 viewModal.style.display = 'flex';
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('query');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                let found = false;
+
+                cells.forEach(cell => {
+                    if (cell.textContent.toLowerCase().includes(query)) {
+                        found = true;
+                    }
+                });
+
+                if (found) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
             });
         });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

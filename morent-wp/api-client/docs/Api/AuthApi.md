@@ -4,6 +4,7 @@ All URIs are relative to https://localhost:7083, except if the operation defines
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**apiAuthAdminLoginPost()**](AuthApi.md#apiAuthAdminLoginPost) | **POST** /api/auth/admin/login |  |
 | [**apiAuthGoogleCallbackGet()**](AuthApi.md#apiAuthGoogleCallbackGet) | **GET** /api/auth/google-callback |  |
 | [**apiAuthGoogleLoginGet()**](AuthApi.md#apiAuthGoogleLoginGet) | **GET** /api/auth/google-login |  |
 | [**apiAuthLoginPost()**](AuthApi.md#apiAuthLoginPost) | **POST** /api/auth/login |  |
@@ -11,6 +12,60 @@ All URIs are relative to https://localhost:7083, except if the operation defines
 | [**apiAuthRefreshPost()**](AuthApi.md#apiAuthRefreshPost) | **POST** /api/auth/refresh |  |
 | [**apiAuthRegisterPost()**](AuthApi.md#apiAuthRegisterPost) | **POST** /api/auth/register |  |
 
+
+## `apiAuthAdminLoginPost()`
+
+```php
+apiAuthAdminLoginPost($login_request): \OpenAPI\Client\models\AuthResponse
+```
+
+
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new OpenAPI\Client\Api\AuthApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$login_request = new \OpenAPI\Client\models\LoginRequest(); // \OpenAPI\Client\models\LoginRequest
+
+try {
+    $result = $apiInstance->apiAuthAdminLoginPost($login_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AuthApi->apiAuthAdminLoginPost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **login_request** | [**\OpenAPI\Client\models\LoginRequest**](../Model/LoginRequest.md)|  | |
+
+### Return type
+
+[**\OpenAPI\Client\models\AuthResponse**](../Model/AuthResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`, `text/json`, `application/*+json`
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `apiAuthGoogleCallbackGet()`
 

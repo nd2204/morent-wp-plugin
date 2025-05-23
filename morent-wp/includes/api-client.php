@@ -17,8 +17,8 @@ class MorentApiClient {
 
     private $base_url = 'https://coral-unbiased-scarcely.ngrok-free.app';
 
-    private Client $client;
-    private Configuration $config;
+    private $client;
+    private $config;
 
     public function __construct() {
         $stack = HandlerStack::create();
@@ -29,7 +29,8 @@ class MorentApiClient {
         ]);
 
         $this->config = Configuration::getDefaultConfiguration()
-            ->setHost($this->base_url);
+            ->setHost($this->base_url)
+            ->setAccessToken($this->getAccessToken());
     }
 
     /**
@@ -48,22 +49,27 @@ class MorentApiClient {
     }
 
     private function getAccessToken(): ?string {
-        return get_option($this->access_token_option);
+        return get_option(self::$access_token_option);
     }
 
     public function saveAccessToken(string $token): void {
-        $this->config->setAccessToken($token);
-        update_option($this->access_token_option, $token);
+        update_option(self::$access_token_option, $token);
     }
 
     private function getRefreshToken(): ?string {
-        return get_option($this->refresh_token_option);
+        return get_option(self::$refresh_token_option);
+    }
+
+    private function saveRefreshToken(string $token): void {
+        update_option(self::$refresh_token_option, $token);
     }
 
     private function refreshAccessToken(): ?string {
+        error_log('Refreshing Access Token...');
         $refreshToken = $this->getRefreshToken();
 
         if (!$refreshToken) {
+            error_log('No Request Token Found: ');
             return null;
         }
 
@@ -73,16 +79,23 @@ class MorentApiClient {
                 new RefreshTokenRequest(["refresh_token" => $refreshToken])
             );
 
-            print_r($result);
+            error_log($result);
             $access_token = $result->getAccessToken();
+            $refreshToken = $result->getRefreshToken();
+
+            if (!empty($refresh_token)) {
+                error_log('Saving new refresh token: ' . $refresh_token);
+                $this->saveRefreshToken($refresh_token);
+            }
             if (!empty($access_token)) {
+                error_log('Saving new access token: ' . $access_token);
                 $this->saveAccessToken($access_token);
                 return $access_token;
             }
 
             return null;
         } catch (Exception $e) {
-            echo 'Exception when calling AuthApi->apiAuthRefreshPost: ', $e->getMessage(), PHP_EOL;
+            error_log('Exception when calling AuthApi->apiAuthRefreshPost: ' . $e->getMessage() . PHP_EOL);
             return null;
         }
     }
@@ -92,7 +105,7 @@ class MorentApiClient {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
                 error_log('Request URL: ' . $request->getUri());
-                error_log('Request Headers: ' . json_encode($request->getHeaders()));
+                // error_log('Request Headers: ' . json_encode($request->getHeaders()));
 
                 $accessToken = $this->getAccessToken();
                 if ($accessToken) {
@@ -100,10 +113,30 @@ class MorentApiClient {
                 }
 
                 return $handler($request, $options)->then(
-                    function (ResponseInterface $response) {
+                    function (ResponseInterface $response) use ($request, $options, $handler) {
+                        if ($response->getStatusCode() === 302) {
+                            $newToken = $this->refreshAccessToken();
+                            if ($newToken) {
+                                $newRequest = $request->withHeader('Authorization', 'Bearer ' . $newToken);
+                                return $handler($newRequest, $options); // ✅ retry the request
+                            } else {
+                                error_log('Refresh token failed, deleting session tokens.');
+                                if (mr_is_logged_in()) {
+                                    mr_logout();
+                                }
+                                return \GuzzleHttp\Promise\Create::rejectionFor(
+                                    new RequestException('Refresh token failed, unable to redirect.', $request));
+                            }
+                        }
                         return $response;
                     },
                     function ($reason) use ($request, $options, $handler) {
+                        if (
+                            $reason instanceof RequestException &&
+                            $reason->hasResponse()
+                        ) {
+                            error_log('Error Response: ' . $reason->getResponse()->getStatusCode());
+                        }
                         if (
                             $reason instanceof RequestException &&
                             $reason->hasResponse() &&
@@ -113,7 +146,17 @@ class MorentApiClient {
                             if ($newToken) {
                                 $newRequest = $request->withHeader('Authorization', 'Bearer ' . $newToken);
                                 return $handler($newRequest, $options);
+                            } else {
+                                error_log('Refresh token failed, deleting session tokens.');
+                                if (mr_is_logged_in()) {
+                                    mr_logout();
+                                }
                             }
+
+                            // Return rejected promise if redirect not possible
+                            return \GuzzleHttp\Promise\Create::rejectionFor(
+                                new RequestException('Refresh token failed, unable to redirect.', $request)
+                            );
                         }
 
                         return \GuzzleHttp\Promise\Create::rejectionFor($reason);

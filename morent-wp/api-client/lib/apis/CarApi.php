@@ -86,6 +86,9 @@ class CarApi
         'apiCarsGet' => [
             'application/json',
         ],
+        'apiCarsModelsGet' => [
+            'application/json',
+        ],
         'apiCarsNearGet' => [
             'application/json',
         ],
@@ -942,7 +945,9 @@ class CarApi
      * @param  float|null $car_filter_min_price car_filter_min_price (optional)
      * @param  float|null $car_filter_max_price car_filter_max_price (optional)
      * @param  int|null $car_filter_rating car_filter_rating (optional)
-     * @param  string|null $car_filter_location car_filter_location (optional)
+     * @param  float|null $car_filter_near_lat car_filter_near_lat (optional)
+     * @param  float|null $car_filter_near_lon car_filter_near_lon (optional)
+     * @param  int|null $car_filter_max_distance_km car_filter_max_distance_km (optional)
      * @param  string|null $car_filter_search car_filter_search (optional)
      * @param  string|null $car_filter_sort car_filter_sort (optional)
      * @param  int|null $paged_query_page paged_query_page (optional)
@@ -953,9 +958,9 @@ class CarApi
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\models\CarDto[]
      */
-    public function apiCarsGet($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_location = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
+    public function apiCarsGet($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_near_lat = null, $car_filter_near_lon = null, $car_filter_max_distance_km = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
     {
-        list($response) = $this->apiCarsGetWithHttpInfo($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_location, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType);
+        list($response) = $this->apiCarsGetWithHttpInfo($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_near_lat, $car_filter_near_lon, $car_filter_max_distance_km, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType);
         return $response;
     }
 
@@ -970,7 +975,9 @@ class CarApi
      * @param  float|null $car_filter_min_price (optional)
      * @param  float|null $car_filter_max_price (optional)
      * @param  int|null $car_filter_rating (optional)
-     * @param  string|null $car_filter_location (optional)
+     * @param  float|null $car_filter_near_lat (optional)
+     * @param  float|null $car_filter_near_lon (optional)
+     * @param  int|null $car_filter_max_distance_km (optional)
      * @param  string|null $car_filter_search (optional)
      * @param  string|null $car_filter_sort (optional)
      * @param  int|null $paged_query_page (optional)
@@ -981,9 +988,9 @@ class CarApi
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\models\CarDto[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function apiCarsGetWithHttpInfo($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_location = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
+    public function apiCarsGetWithHttpInfo($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_near_lat = null, $car_filter_near_lon = null, $car_filter_max_distance_km = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
     {
-        $request = $this->apiCarsGetRequest($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_location, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType);
+        $request = $this->apiCarsGetRequest($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_near_lat, $car_filter_near_lon, $car_filter_max_distance_km, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1065,7 +1072,9 @@ class CarApi
      * @param  float|null $car_filter_min_price (optional)
      * @param  float|null $car_filter_max_price (optional)
      * @param  int|null $car_filter_rating (optional)
-     * @param  string|null $car_filter_location (optional)
+     * @param  float|null $car_filter_near_lat (optional)
+     * @param  float|null $car_filter_near_lon (optional)
+     * @param  int|null $car_filter_max_distance_km (optional)
      * @param  string|null $car_filter_search (optional)
      * @param  string|null $car_filter_sort (optional)
      * @param  int|null $paged_query_page (optional)
@@ -1075,9 +1084,9 @@ class CarApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiCarsGetAsync($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_location = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
+    public function apiCarsGetAsync($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_near_lat = null, $car_filter_near_lon = null, $car_filter_max_distance_km = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
     {
-        return $this->apiCarsGetAsyncWithHttpInfo($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_location, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType)
+        return $this->apiCarsGetAsyncWithHttpInfo($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_near_lat, $car_filter_near_lon, $car_filter_max_distance_km, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1096,7 +1105,9 @@ class CarApi
      * @param  float|null $car_filter_min_price (optional)
      * @param  float|null $car_filter_max_price (optional)
      * @param  int|null $car_filter_rating (optional)
-     * @param  string|null $car_filter_location (optional)
+     * @param  float|null $car_filter_near_lat (optional)
+     * @param  float|null $car_filter_near_lon (optional)
+     * @param  int|null $car_filter_max_distance_km (optional)
      * @param  string|null $car_filter_search (optional)
      * @param  string|null $car_filter_sort (optional)
      * @param  int|null $paged_query_page (optional)
@@ -1106,10 +1117,10 @@ class CarApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function apiCarsGetAsyncWithHttpInfo($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_location = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
+    public function apiCarsGetAsyncWithHttpInfo($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_near_lat = null, $car_filter_near_lon = null, $car_filter_max_distance_km = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
     {
         $returnType = '\OpenAPI\Client\models\CarDto[]';
-        $request = $this->apiCarsGetRequest($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_location, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType);
+        $request = $this->apiCarsGetRequest($car_filter_brand, $car_filter_type, $car_filter_capacity, $car_filter_fuel_type, $car_filter_gearbox, $car_filter_min_price, $car_filter_max_price, $car_filter_rating, $car_filter_near_lat, $car_filter_near_lon, $car_filter_max_distance_km, $car_filter_search, $car_filter_sort, $paged_query_page, $paged_query_page_size, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1158,7 +1169,9 @@ class CarApi
      * @param  float|null $car_filter_min_price (optional)
      * @param  float|null $car_filter_max_price (optional)
      * @param  int|null $car_filter_rating (optional)
-     * @param  string|null $car_filter_location (optional)
+     * @param  float|null $car_filter_near_lat (optional)
+     * @param  float|null $car_filter_near_lon (optional)
+     * @param  int|null $car_filter_max_distance_km (optional)
      * @param  string|null $car_filter_search (optional)
      * @param  string|null $car_filter_sort (optional)
      * @param  int|null $paged_query_page (optional)
@@ -1168,8 +1181,10 @@ class CarApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function apiCarsGetRequest($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_location = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
+    public function apiCarsGetRequest($car_filter_brand = null, $car_filter_type = null, $car_filter_capacity = null, $car_filter_fuel_type = null, $car_filter_gearbox = null, $car_filter_min_price = null, $car_filter_max_price = null, $car_filter_rating = null, $car_filter_near_lat = null, $car_filter_near_lon = null, $car_filter_max_distance_km = null, $car_filter_search = null, $car_filter_sort = null, $paged_query_page = null, $paged_query_page_size = null, string $contentType = self::contentTypes['apiCarsGet'][0])
     {
+
+
 
 
 
@@ -1266,9 +1281,27 @@ class CarApi
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $car_filter_location,
-            'carFilter.Location', // param base name
-            'string', // openApiType
+            $car_filter_near_lat,
+            'carFilter.NearLat', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $car_filter_near_lon,
+            'carFilter.NearLon', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $car_filter_max_distance_km,
+            'carFilter.MaxDistanceKm', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1304,6 +1337,276 @@ class CarApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $paged_query_page_size,
             'pagedQuery.PageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation apiCarsModelsGet
+     *
+     * @param  int|null $page page (optional)
+     * @param  int|null $page_size page_size (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsModelsGet'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\models\CarModelDto[]
+     */
+    public function apiCarsModelsGet($page = null, $page_size = null, string $contentType = self::contentTypes['apiCarsModelsGet'][0])
+    {
+        list($response) = $this->apiCarsModelsGetWithHttpInfo($page, $page_size, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation apiCarsModelsGetWithHttpInfo
+     *
+     * @param  int|null $page (optional)
+     * @param  int|null $page_size (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsModelsGet'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\models\CarModelDto[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function apiCarsModelsGetWithHttpInfo($page = null, $page_size = null, string $contentType = self::contentTypes['apiCarsModelsGet'][0])
+    {
+        $request = $this->apiCarsModelsGetRequest($page, $page_size, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\models\CarModelDto[]',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\models\CarModelDto[]',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\models\CarModelDto[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation apiCarsModelsGetAsync
+     *
+     * @param  int|null $page (optional)
+     * @param  int|null $page_size (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsModelsGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function apiCarsModelsGetAsync($page = null, $page_size = null, string $contentType = self::contentTypes['apiCarsModelsGet'][0])
+    {
+        return $this->apiCarsModelsGetAsyncWithHttpInfo($page, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation apiCarsModelsGetAsyncWithHttpInfo
+     *
+     * @param  int|null $page (optional)
+     * @param  int|null $page_size (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsModelsGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function apiCarsModelsGetAsyncWithHttpInfo($page = null, $page_size = null, string $contentType = self::contentTypes['apiCarsModelsGet'][0])
+    {
+        $returnType = '\OpenAPI\Client\models\CarModelDto[]';
+        $request = $this->apiCarsModelsGetRequest($page, $page_size, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'apiCarsModelsGet'
+     *
+     * @param  int|null $page (optional)
+     * @param  int|null $page_size (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiCarsModelsGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function apiCarsModelsGetRequest($page = null, $page_size = null, string $contentType = self::contentTypes['apiCarsModelsGet'][0])
+    {
+
+
+
+
+        $resourcePath = '/api/cars/models';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'Page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'PageSize', // param base name
             'integer', // openApiType
             'form', // style
             true, // explode

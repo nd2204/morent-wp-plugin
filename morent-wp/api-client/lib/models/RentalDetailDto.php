@@ -1,6 +1,6 @@
 <?php
 /**
- * CarDto
+ * RentalDetailDto
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CarDto Class Doc Comment
+ * RentalDetailDto Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -40,7 +40,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class RentalDetailDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CarDto';
+    protected static $openAPIModelName = 'RentalDetailDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,16 +58,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'title' => 'string',
-        'car_model' => '\OpenAPI\Client\models\CarModelDto',
-        'license_plate' => 'string',
-        'price_per_day' => 'float',
+        'user' => '\OpenAPI\Client\models\UserDto',
+        'car' => '\OpenAPI\Client\models\CarDto',
+        'pickup_date' => '\DateTime',
+        'dropoff_date' => '\DateTime',
+        'pickup_location' => '\OpenAPI\Client\models\LocationDto',
+        'dropoff_location' => '\OpenAPI\Client\models\LocationDto',
+        'total_cost' => 'float',
         'currency' => 'string',
-        'images' => '\OpenAPI\Client\models\CarImageDto[]',
-        'is_available' => 'bool',
-        'average_rating' => 'float',
-        'reviews_count' => 'int',
-        'location' => '\OpenAPI\Client\models\LocationDto'
+        'status' => 'string',
+        'created_at' => '\DateTime'
     ];
 
     /**
@@ -79,16 +79,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'title' => null,
-        'car_model' => null,
-        'license_plate' => null,
-        'price_per_day' => 'double',
+        'user' => null,
+        'car' => null,
+        'pickup_date' => 'date-time',
+        'dropoff_date' => 'date-time',
+        'pickup_location' => null,
+        'dropoff_location' => null,
+        'total_cost' => 'double',
         'currency' => null,
-        'images' => null,
-        'is_available' => null,
-        'average_rating' => 'double',
-        'reviews_count' => 'int32',
-        'location' => null
+        'status' => null,
+        'created_at' => 'date-time'
     ];
 
     /**
@@ -98,16 +98,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'title' => false,
-        'car_model' => false,
-        'license_plate' => false,
-        'price_per_day' => false,
+        'user' => false,
+        'car' => false,
+        'pickup_date' => false,
+        'dropoff_date' => false,
+        'pickup_location' => false,
+        'dropoff_location' => false,
+        'total_cost' => false,
         'currency' => false,
-        'images' => false,
-        'is_available' => false,
-        'average_rating' => false,
-        'reviews_count' => false,
-        'location' => false
+        'status' => false,
+        'created_at' => false
     ];
 
     /**
@@ -197,16 +197,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'title' => 'title',
-        'car_model' => 'carModel',
-        'license_plate' => 'licensePlate',
-        'price_per_day' => 'pricePerDay',
+        'user' => 'user',
+        'car' => 'car',
+        'pickup_date' => 'pickupDate',
+        'dropoff_date' => 'dropoffDate',
+        'pickup_location' => 'pickupLocation',
+        'dropoff_location' => 'dropoffLocation',
+        'total_cost' => 'totalCost',
         'currency' => 'currency',
-        'images' => 'images',
-        'is_available' => 'isAvailable',
-        'average_rating' => 'averageRating',
-        'reviews_count' => 'reviewsCount',
-        'location' => 'location'
+        'status' => 'status',
+        'created_at' => 'createdAt'
     ];
 
     /**
@@ -216,16 +216,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'title' => 'setTitle',
-        'car_model' => 'setCarModel',
-        'license_plate' => 'setLicensePlate',
-        'price_per_day' => 'setPricePerDay',
+        'user' => 'setUser',
+        'car' => 'setCar',
+        'pickup_date' => 'setPickupDate',
+        'dropoff_date' => 'setDropoffDate',
+        'pickup_location' => 'setPickupLocation',
+        'dropoff_location' => 'setDropoffLocation',
+        'total_cost' => 'setTotalCost',
         'currency' => 'setCurrency',
-        'images' => 'setImages',
-        'is_available' => 'setIsAvailable',
-        'average_rating' => 'setAverageRating',
-        'reviews_count' => 'setReviewsCount',
-        'location' => 'setLocation'
+        'status' => 'setStatus',
+        'created_at' => 'setCreatedAt'
     ];
 
     /**
@@ -235,16 +235,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'title' => 'getTitle',
-        'car_model' => 'getCarModel',
-        'license_plate' => 'getLicensePlate',
-        'price_per_day' => 'getPricePerDay',
+        'user' => 'getUser',
+        'car' => 'getCar',
+        'pickup_date' => 'getPickupDate',
+        'dropoff_date' => 'getDropoffDate',
+        'pickup_location' => 'getPickupLocation',
+        'dropoff_location' => 'getDropoffLocation',
+        'total_cost' => 'getTotalCost',
         'currency' => 'getCurrency',
-        'images' => 'getImages',
-        'is_available' => 'getIsAvailable',
-        'average_rating' => 'getAverageRating',
-        'reviews_count' => 'getReviewsCount',
-        'location' => 'getLocation'
+        'status' => 'getStatus',
+        'created_at' => 'getCreatedAt'
     ];
 
     /**
@@ -305,16 +305,16 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('car_model', $data ?? [], null);
-        $this->setIfExists('license_plate', $data ?? [], null);
-        $this->setIfExists('price_per_day', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
+        $this->setIfExists('car', $data ?? [], null);
+        $this->setIfExists('pickup_date', $data ?? [], null);
+        $this->setIfExists('dropoff_date', $data ?? [], null);
+        $this->setIfExists('pickup_location', $data ?? [], null);
+        $this->setIfExists('dropoff_location', $data ?? [], null);
+        $this->setIfExists('total_cost', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('images', $data ?? [], null);
-        $this->setIfExists('is_available', $data ?? [], null);
-        $this->setIfExists('average_rating', $data ?? [], null);
-        $this->setIfExists('reviews_count', $data ?? [], null);
-        $this->setIfExists('location', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
     }
 
     /**
@@ -347,35 +347,35 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
+        if ($this->container['user'] === null) {
+            $invalidProperties[] = "'user' can't be null";
         }
-        if ($this->container['car_model'] === null) {
-            $invalidProperties[] = "'car_model' can't be null";
+        if ($this->container['car'] === null) {
+            $invalidProperties[] = "'car' can't be null";
         }
-        if ($this->container['license_plate'] === null) {
-            $invalidProperties[] = "'license_plate' can't be null";
+        if ($this->container['pickup_date'] === null) {
+            $invalidProperties[] = "'pickup_date' can't be null";
         }
-        if ($this->container['price_per_day'] === null) {
-            $invalidProperties[] = "'price_per_day' can't be null";
+        if ($this->container['dropoff_date'] === null) {
+            $invalidProperties[] = "'dropoff_date' can't be null";
+        }
+        if ($this->container['pickup_location'] === null) {
+            $invalidProperties[] = "'pickup_location' can't be null";
+        }
+        if ($this->container['dropoff_location'] === null) {
+            $invalidProperties[] = "'dropoff_location' can't be null";
+        }
+        if ($this->container['total_cost'] === null) {
+            $invalidProperties[] = "'total_cost' can't be null";
         }
         if ($this->container['currency'] === null) {
             $invalidProperties[] = "'currency' can't be null";
         }
-        if ($this->container['images'] === null) {
-            $invalidProperties[] = "'images' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['is_available'] === null) {
-            $invalidProperties[] = "'is_available' can't be null";
-        }
-        if ($this->container['average_rating'] === null) {
-            $invalidProperties[] = "'average_rating' can't be null";
-        }
-        if ($this->container['reviews_count'] === null) {
-            $invalidProperties[] = "'reviews_count' can't be null";
-        }
-        if ($this->container['location'] === null) {
-            $invalidProperties[] = "'location' can't be null";
+        if ($this->container['created_at'] === null) {
+            $invalidProperties[] = "'created_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -420,109 +420,190 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets title
+     * Gets user
      *
-     * @return string
+     * @return \OpenAPI\Client\models\UserDto
      */
-    public function getTitle()
+    public function getUser()
     {
-        return $this->container['title'];
+        return $this->container['user'];
     }
 
     /**
-     * Sets title
+     * Sets user
      *
-     * @param string $title title
+     * @param \OpenAPI\Client\models\UserDto $user user
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setUser($user)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($user)) {
+            throw new \InvalidArgumentException('non-nullable user cannot be null');
         }
-        $this->container['title'] = $title;
+        $this->container['user'] = $user;
 
         return $this;
     }
 
     /**
-     * Gets car_model
+     * Gets car
      *
-     * @return \OpenAPI\Client\models\CarModelDto
+     * @return \OpenAPI\Client\models\CarDto
      */
-    public function getCarModel()
+    public function getCar()
     {
-        return $this->container['car_model'];
+        return $this->container['car'];
     }
 
     /**
-     * Sets car_model
+     * Sets car
      *
-     * @param \OpenAPI\Client\models\CarModelDto $car_model car_model
+     * @param \OpenAPI\Client\models\CarDto $car car
      *
      * @return self
      */
-    public function setCarModel($car_model)
+    public function setCar($car)
     {
-        if (is_null($car_model)) {
-            throw new \InvalidArgumentException('non-nullable car_model cannot be null');
+        if (is_null($car)) {
+            throw new \InvalidArgumentException('non-nullable car cannot be null');
         }
-        $this->container['car_model'] = $car_model;
+        $this->container['car'] = $car;
 
         return $this;
     }
 
     /**
-     * Gets license_plate
+     * Gets pickup_date
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getLicensePlate()
+    public function getPickupDate()
     {
-        return $this->container['license_plate'];
+        return $this->container['pickup_date'];
     }
 
     /**
-     * Sets license_plate
+     * Sets pickup_date
      *
-     * @param string $license_plate license_plate
+     * @param \DateTime $pickup_date pickup_date
      *
      * @return self
      */
-    public function setLicensePlate($license_plate)
+    public function setPickupDate($pickup_date)
     {
-        if (is_null($license_plate)) {
-            throw new \InvalidArgumentException('non-nullable license_plate cannot be null');
+        if (is_null($pickup_date)) {
+            throw new \InvalidArgumentException('non-nullable pickup_date cannot be null');
         }
-        $this->container['license_plate'] = $license_plate;
+        $this->container['pickup_date'] = $pickup_date;
 
         return $this;
     }
 
     /**
-     * Gets price_per_day
+     * Gets dropoff_date
+     *
+     * @return \DateTime
+     */
+    public function getDropoffDate()
+    {
+        return $this->container['dropoff_date'];
+    }
+
+    /**
+     * Sets dropoff_date
+     *
+     * @param \DateTime $dropoff_date dropoff_date
+     *
+     * @return self
+     */
+    public function setDropoffDate($dropoff_date)
+    {
+        if (is_null($dropoff_date)) {
+            throw new \InvalidArgumentException('non-nullable dropoff_date cannot be null');
+        }
+        $this->container['dropoff_date'] = $dropoff_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets pickup_location
+     *
+     * @return \OpenAPI\Client\models\LocationDto
+     */
+    public function getPickupLocation()
+    {
+        return $this->container['pickup_location'];
+    }
+
+    /**
+     * Sets pickup_location
+     *
+     * @param \OpenAPI\Client\models\LocationDto $pickup_location pickup_location
+     *
+     * @return self
+     */
+    public function setPickupLocation($pickup_location)
+    {
+        if (is_null($pickup_location)) {
+            throw new \InvalidArgumentException('non-nullable pickup_location cannot be null');
+        }
+        $this->container['pickup_location'] = $pickup_location;
+
+        return $this;
+    }
+
+    /**
+     * Gets dropoff_location
+     *
+     * @return \OpenAPI\Client\models\LocationDto
+     */
+    public function getDropoffLocation()
+    {
+        return $this->container['dropoff_location'];
+    }
+
+    /**
+     * Sets dropoff_location
+     *
+     * @param \OpenAPI\Client\models\LocationDto $dropoff_location dropoff_location
+     *
+     * @return self
+     */
+    public function setDropoffLocation($dropoff_location)
+    {
+        if (is_null($dropoff_location)) {
+            throw new \InvalidArgumentException('non-nullable dropoff_location cannot be null');
+        }
+        $this->container['dropoff_location'] = $dropoff_location;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_cost
      *
      * @return float
      */
-    public function getPricePerDay()
+    public function getTotalCost()
     {
-        return $this->container['price_per_day'];
+        return $this->container['total_cost'];
     }
 
     /**
-     * Sets price_per_day
+     * Sets total_cost
      *
-     * @param float $price_per_day price_per_day
+     * @param float $total_cost total_cost
      *
      * @return self
      */
-    public function setPricePerDay($price_per_day)
+    public function setTotalCost($total_cost)
     {
-        if (is_null($price_per_day)) {
-            throw new \InvalidArgumentException('non-nullable price_per_day cannot be null');
+        if (is_null($total_cost)) {
+            throw new \InvalidArgumentException('non-nullable total_cost cannot be null');
         }
-        $this->container['price_per_day'] = $price_per_day;
+        $this->container['total_cost'] = $total_cost;
 
         return $this;
     }
@@ -555,136 +636,55 @@ class CarDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets images
+     * Gets status
      *
-     * @return \OpenAPI\Client\models\CarImageDto[]
+     * @return string
      */
-    public function getImages()
+    public function getStatus()
     {
-        return $this->container['images'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets images
+     * Sets status
      *
-     * @param \OpenAPI\Client\models\CarImageDto[] $images images
+     * @param string $status status
      *
      * @return self
      */
-    public function setImages($images)
+    public function setStatus($status)
     {
-        if (is_null($images)) {
-            throw new \InvalidArgumentException('non-nullable images cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['images'] = $images;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets is_available
+     * Gets created_at
      *
-     * @return bool
+     * @return \DateTime
      */
-    public function getIsAvailable()
+    public function getCreatedAt()
     {
-        return $this->container['is_available'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets is_available
+     * Sets created_at
      *
-     * @param bool $is_available is_available
+     * @param \DateTime $created_at created_at
      *
      * @return self
      */
-    public function setIsAvailable($is_available)
+    public function setCreatedAt($created_at)
     {
-        if (is_null($is_available)) {
-            throw new \InvalidArgumentException('non-nullable is_available cannot be null');
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
         }
-        $this->container['is_available'] = $is_available;
-
-        return $this;
-    }
-
-    /**
-     * Gets average_rating
-     *
-     * @return float
-     */
-    public function getAverageRating()
-    {
-        return $this->container['average_rating'];
-    }
-
-    /**
-     * Sets average_rating
-     *
-     * @param float $average_rating average_rating
-     *
-     * @return self
-     */
-    public function setAverageRating($average_rating)
-    {
-        if (is_null($average_rating)) {
-            throw new \InvalidArgumentException('non-nullable average_rating cannot be null');
-        }
-        $this->container['average_rating'] = $average_rating;
-
-        return $this;
-    }
-
-    /**
-     * Gets reviews_count
-     *
-     * @return int
-     */
-    public function getReviewsCount()
-    {
-        return $this->container['reviews_count'];
-    }
-
-    /**
-     * Sets reviews_count
-     *
-     * @param int $reviews_count reviews_count
-     *
-     * @return self
-     */
-    public function setReviewsCount($reviews_count)
-    {
-        if (is_null($reviews_count)) {
-            throw new \InvalidArgumentException('non-nullable reviews_count cannot be null');
-        }
-        $this->container['reviews_count'] = $reviews_count;
-
-        return $this;
-    }
-
-    /**
-     * Gets location
-     *
-     * @return \OpenAPI\Client\models\LocationDto
-     */
-    public function getLocation()
-    {
-        return $this->container['location'];
-    }
-
-    /**
-     * Sets location
-     *
-     * @param \OpenAPI\Client\models\LocationDto $location location
-     *
-     * @return self
-     */
-    public function setLocation($location)
-    {
-        if (is_null($location)) {
-            throw new \InvalidArgumentException('non-nullable location cannot be null');
-        }
-        $this->container['location'] = $location;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }

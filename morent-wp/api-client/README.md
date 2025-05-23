@@ -79,6 +79,8 @@ Class | Method | HTTP request | Description
 *AdminApi* | [**apiAdminCarsIdPut**](docs/Api/AdminApi.md#apiadmincarsidput) | **PUT** /api/admin/cars/{id} | 
 *AdminApi* | [**apiAdminCarsPost**](docs/Api/AdminApi.md#apiadmincarspost) | **POST** /api/admin/cars | 
 *AdminApi* | [**apiAdminRentalsGet**](docs/Api/AdminApi.md#apiadminrentalsget) | **GET** /api/admin/rentals | 
+*AdminApi* | [**apiAdminUsersGet**](docs/Api/AdminApi.md#apiadminusersget) | **GET** /api/admin/users | 
+*AuthApi* | [**apiAuthAdminLoginPost**](docs/Api/AuthApi.md#apiauthadminloginpost) | **POST** /api/auth/admin/login | 
 *AuthApi* | [**apiAuthGoogleCallbackGet**](docs/Api/AuthApi.md#apiauthgooglecallbackget) | **GET** /api/auth/google-callback | 
 *AuthApi* | [**apiAuthGoogleLoginGet**](docs/Api/AuthApi.md#apiauthgoogleloginget) | **GET** /api/auth/google-login | 
 *AuthApi* | [**apiAuthLoginPost**](docs/Api/AuthApi.md#apiauthloginpost) | **POST** /api/auth/login | 
@@ -89,6 +91,7 @@ Class | Method | HTTP request | Description
 *CarApi* | [**apiCarsCarIdImagesGet**](docs/Api/CarApi.md#apicarscaridimagesget) | **GET** /api/cars/{carId}/images | 
 *CarApi* | [**apiCarsCarIdReviewsGet**](docs/Api/CarApi.md#apicarscaridreviewsget) | **GET** /api/cars/{carId}/reviews | 
 *CarApi* | [**apiCarsGet**](docs/Api/CarApi.md#apicarsget) | **GET** /api/cars | 
+*CarApi* | [**apiCarsModelsGet**](docs/Api/CarApi.md#apicarsmodelsget) | **GET** /api/cars/models | 
 *CarApi* | [**apiCarsNearGet**](docs/Api/CarApi.md#apicarsnearget) | **GET** /api/cars/near | 
 *PaymentApi* | [**apiPaymentsMethodsGet**](docs/Api/PaymentApi.md#apipaymentsmethodsget) | **GET** /api/payments/methods | 
 *PaymentApi* | [**apiPaymentsPost**](docs/Api/PaymentApi.md#apipaymentspost) | **POST** /api/payments | 
@@ -123,6 +126,7 @@ Class | Method | HTTP request | Description
 - [ProblemDetails](docs/Model/ProblemDetails.md)
 - [RefreshTokenRequest](docs/Model/RefreshTokenRequest.md)
 - [RegisterUserCommand](docs/Model/RegisterUserCommand.md)
+- [RentalDetailDto](docs/Model/RentalDetailDto.md)
 - [RentalDto](docs/Model/RentalDto.md)
 - [ReviewDto](docs/Model/ReviewDto.md)
 - [UpdateCarCommand](docs/Model/UpdateCarCommand.md)
